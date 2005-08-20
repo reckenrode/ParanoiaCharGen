@@ -1,0 +1,14 @@
+A proper changelog should indicate which classes, methods, and functions 
+changed. They should be grouped by the files to which they belong, and be 
+bulleted with one of three symbols. These symbols are: '+' to represent a new
+class/method/function, '-' to indicate the removal of a class/method/function, 
+and '*' to indicate that the class/method/function has changed. '-' may also be 
+used to indicate that a class/method/function has been moved or renamed. In 
+case, list its old name in the entry. Changelogs shouldn't be wider than 80 
+columns.
+
+Sample changelog entry:
+foo.py
+ + bar - description of bar
+ - baz - description of baz's removal
+ * blat - description of why blat is so much cooler now

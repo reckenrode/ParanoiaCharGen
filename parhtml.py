@@ -8,7 +8,7 @@ import sys
 class ParanoiaParser(HTMLParser, object):
     def __init__(self):
         super(ParanoiaParser, self).__init__()
-
+        
         self.procs = {}
         self.procs['make-random-char?'] = self.make_random_char
 
@@ -49,7 +49,7 @@ class ParanoiaParser(HTMLParser, object):
 
         self.reset_procs()
         self.procs['name?'] = lambda: sys.stdout.write('ABC-"John-1')
-        for skill in self.char:
+        for skill in self.char.skills:
             s = '<table class="skill"><thead><caption>%s</caption></thead>\n' % escape(skill.name.capitalize())
             s += '<tbody class="specs">'
             for spec in skill:

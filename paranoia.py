@@ -2,12 +2,41 @@
 
 import random
 
+management_specs = [ "bootlicking", "chutzpah", "hygiene", "con games",
+                         "interrogation", "intimidation", "moxie", "oratory" ]
 
+stealth_specs = [ "concealment", "disguise", "high alert",
+                  "security systems", "shadowing", "slight of hand",
+                  "sneaking", "surveilance" ]
+
+violence_specs = [ "agility", "energy weapons", "demolition",
+                   "field weapons", "fine manipulation", "hand weapons",
+                   "projectile weapons", "thrown weapons",
+                   "unarmed combat", "vehicular combat" ]
+
+hardware_specs = [ "bot ops & maintenance", "chemical engineering",
+                   "electronic engineering", "habitat engineering",
+                   "mechanical engineering", "nuclear engineering",
+                   "vehicle ops & maintenance",
+                   "weapons & armor maintenance"]
+
+software_specs = [ "bot programming", "c-bay", "data analysis",
+                   "data search", "financial systems", "hacking",
+                   "operating systems", "vehicle programming" ]
+
+wetware_specs = [ "biosciences", "bioweapons", "cloning", "medical",
+                  "outdoor life", "pharmatherapy", "psychotherapy",
+                  "suggestion" ]
+
+action_skills = ["management", "stealth", "violence"]
+knowledge_skills = ["hardware", "software", "wetware"]
+          
+                
 class Skill(object):
-    def __init__(self, name, value, specs):
+    def __init__(self, name, defvalue, specs):
         self.name = name
-        self.value = value
-        self.__specs = dict((s, value) for s in specs)
+        self.value = defvalue
+        self.__specs = dict((s, defvalue) for s in specs)
 
     def __iter__(self):
         return iter(self.__specs)
@@ -23,49 +52,33 @@ class Skill(object):
         return "%s: %i, %s" % (self.name, self.value, self.__specs)
 
 
-class Character(object):
-    management_specs = [ "bootlicking", "chutzpah", "hygiene", "con games",
-                         "interrogation", "intimidation", "moxie", "oratory" ]
+class SkillProps(type):
+    def __init__(cls, name, bases, dict):
+        super(SkillProps, cls).__init__(name, bases, dict)    
+        for sk in knowledge_skills + action_skills:
+            setattr(cls, sk, property(lambda self, key = sk: self._SkillCollection__skills[key]))
 
-    stealth_specs = [ "concealment", "disguise", "high alert",
-                      "security systems", "shadowing", "slight of hand",
-                      "sneaking", "surveilance" ]
-    
-    violence_specs = [ "agility", "energy weapons", "demolition",
-                       "field weapons", "fine manipulation", "hand weapons",
-                       "projectile weapons", "thrown weapons",
-                       "unarmed combat", "vehicular combat" ]
-    
-    hardware_specs = [ "bot ops & maintenance", "chemical engineering",
-                       "electronic engineering", "habitat engineering",
-                       "mechanical engineering", "nuclear engineering",
-                       "vehicle ops & maintenance",
-                       "weapons & armor maintenance"]
-
-    software_specs = [ "bot programming", "c-bay", "data analysis",
-                       "data search", "financial systems", "hacking",
-                       "operating systems", "vehicle programming" ]
-    
-    wetware_specs = [ "biosciences", "bioweapons", "cloning", "medical",
-                      "outdoor life", "pharmatherapy", "psychotherapy",
-                      "suggestion" ]
-    
-    action_skills = ["management", "stealth", "violence" ]
-    knowledge_skills = ["hardware", "software", "wetware" ]
-
+        
+class SkillCollection(object):
+    __metaclass__ = SkillProps
+                                  
     def __init__(self):
-        self.__skills = [Skill(sk, 0, (s for s in Character.__dict__[sk+'_specs']))
-                       for sk in Character.action_skills+Character.knowledge_skills]
-
-    def __getattribute__(self, attr):
-        for sk in super(Character, self).__getattribute__('_Character__skills'):
-            if attr == sk.name:
-                return sk
-        else:
-            return super(Character, self).__getattribute__(attr)
-
+        self.__skills = dict((sk, Skill(sk, 0, (s for s in globals()[sk+'_specs'])))
+                                 for sk in action_skills + knowledge_skills)
+    
     def __iter__(self):
-        return iter(self.__skills)
+        return self.__skills.itervalues()
+        
+    def __repr__(self):
+        return repr(self.__skills)
+        
+    def __str__(self):
+        return str(self.__skills)
+
+
+class Character(object):
+    def __init__(self):
+        self.skills = SkillCollection()
 
     def __repr__(self):
         return '\n'.join(`x` for x in self)
@@ -74,7 +87,7 @@ class Character(object):
 def make_random_char():
     char = Character()
 
-    for skill in char:
+    for skill in char.skills:
         # set skill base ratings
         rating = random.randint(1, 20) // 3
         if rating < 4:
@@ -85,7 +98,7 @@ def make_random_char():
 # Here we want a list of all the skills a character might have.
 # The generator expression gives us an iterator over each list, and reduce
 # adds each item to the final list
-    tmp_spec_list = reduce(lambda x,y: x+y, (Character.__dict__[x] for x in Character.__dict__ if x.find('_spec') != -1))
+    tmp_spec_list = reduce(lambda x, y: x+y, (globals()[x] for x in globals() if x[-6:] == '_specs'))
     
     random.shuffle(tmp_spec_list)
     tmp_spec_list.remove("energy weapons")
@@ -96,7 +109,7 @@ def make_random_char():
     for spec in tmp_spec_list:
         if boosts >= 6:
             break
-        for skill in char:
+        for skill in char.skills:
             if spec in skill:
                 if rec_skills.get(skill.name, 0) < 3:
                     rec_skills[skill.name] = rec_skills.get(skill.name, 0) + 1
@@ -109,7 +122,7 @@ def make_random_char():
     for spec in tmp_spec_list:
         if drops <= 0:
             break
-        for skill in char:
+        for skill in char.skills:
             if spec in skill:
                 if rec_skills.get(skill.name, 0) > 0:
                     rec_skills[skill.name] = rec_skills.get(skill.name, 0) - 1
@@ -118,8 +131,6 @@ def make_random_char():
                     drops -= 1
 
     # vital speciality!
-    char.violence['energy weapons'] += 4
+    char.skills.violence['energy weapons'] += 4
 
     return char
-
-
