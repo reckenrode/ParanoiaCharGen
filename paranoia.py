@@ -30,8 +30,8 @@ wetware_specs = [ "biosciences", "bioweapons", "cloning", "medical",
 
 action_skills = ["management", "stealth", "violence"]
 knowledge_skills = ["hardware", "software", "wetware"]
-          
-                
+
+
 class Skill(object):
     def __init__(self, name, defvalue, specs):
         self.name = name
@@ -44,7 +44,7 @@ class Skill(object):
     def __setitem__(self, idx, val):
         self.__specs[idx] = val
 
-        
+
     def __getitem__(self, idx):
         return self.__specs[idx]
 
@@ -54,24 +54,24 @@ class Skill(object):
 
 class SkillProps(type):
     def __init__(cls, name, bases, dict):
-        super(SkillProps, cls).__init__(name, bases, dict)    
+        super(SkillProps, cls).__init__(name, bases, dict)
         for sk in knowledge_skills + action_skills:
             setattr(cls, sk, property(lambda self, key = sk: self._SkillCollection__skills[key]))
 
-        
+
 class SkillCollection(object):
     __metaclass__ = SkillProps
-                                  
+
     def __init__(self):
         self.__skills = dict((sk, Skill(sk, 0, (s for s in globals()[sk+'_specs'])))
                                  for sk in action_skills + knowledge_skills)
-    
+
     def __iter__(self):
         return self.__skills.itervalues()
-        
+
     def __repr__(self):
         return repr(self.__skills)
-        
+
     def __str__(self):
         return str(self.__skills)
 
@@ -82,7 +82,7 @@ class Character(object):
 
     def __repr__(self):
         return '\n'.join(`x` for x in self)
-    
+
 
 def make_random_char():
     char = Character()
@@ -99,7 +99,7 @@ def make_random_char():
 # The generator expression gives us an iterator over each list, and reduce
 # adds each item to the final list
     tmp_spec_list = reduce(lambda x, y: x+y, (globals()[x] for x in globals() if x[-6:] == '_specs'))
-    
+
     random.shuffle(tmp_spec_list)
     tmp_spec_list.remove("energy weapons")
 
