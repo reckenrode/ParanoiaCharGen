@@ -1,9 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 from HTMLParser import HTMLParser, HTMLParseError
 from xml.sax.saxutils import escape
-import paranoia
-import sys
+import paranoia, sys
 
 class ParanoiaParser(HTMLParser, object):
     def __init__(self):
@@ -74,5 +73,7 @@ class ParanoiaParser(HTMLParser, object):
 
 
 if __name__ == '__main__':
+    print 'Content-Type: text/html; charset=iso-8859-1'
+    print
     parser = ParanoiaParser()
     parser.feed(open('paranoia-template.xml').read())

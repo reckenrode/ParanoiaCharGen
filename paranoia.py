@@ -17,7 +17,7 @@ class Skill(object):
     def __init__(self, name, defvalue, specs):
         self.name = name
         self.value = defvalue
-        self.__specs = dict((s, defvalue) for s in specs)
+        self.__specs = dict([(s, defvalue) for s in specs])
 
     def __iter__(self):
         return iter(self.__specs)
@@ -44,8 +44,8 @@ class SkillCollection(object):
     __metaclass__ = SkillProps
 
     def __init__(self):
-        self.__skills = dict((sk, Skill(sk, 0, (s for s in globals()[sk+'_specs'])))
-                                 for sk in action_skills + knowledge_skills)
+        self.__skills = dict([(sk, Skill(sk, 0, [s for s in globals()[sk+'_specs']]))
+                                 for sk in action_skills + knowledge_skills])
 
     def __iter__(self):
         return self.__skills.itervalues()
@@ -63,7 +63,7 @@ class Character(object):
         self.group = ServiceGroup()
 
     def __repr__(self):
-        return '\n'.join(`x` for x in self.skills)
+        return '\n'.join([`x` for x in self.skills])
 
 
 def pick_svc_group():
@@ -102,7 +102,7 @@ def make_random_char():
 # Here we want a list of all the skills a character might have.
 # The generator expression gives us an iterator over each list, and reduce
 # adds each item to the final list
-    tmp_spec_list = reduce(operator.add, (globals()[x] for x in globals() if x[-6:] == '_specs'))
+    tmp_spec_list = reduce(operator.add, [globals()[x] for x in globals() if x[-6:] == '_specs'])
 
     random.shuffle(tmp_spec_list)
     tmp_spec_list.remove('energy weapons')

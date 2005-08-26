@@ -40,7 +40,7 @@ groups = [(3, 'Armed Forces', 'af'),
           (2, 'Technical Services', 'tech'),
           (1, 'Industrial spy or saboteur', 'spy')]
 
-weighted_groups = reduce(operator.add, ([g for w in xrange(g[0])] for g in groups))
+weighted_groups = reduce(operator.add, [[g for w in xrange(g[0])] for g in groups])
 
 
 af_firms = ['Ammunition Fresheners', 'Armed Forces Friends Network',
