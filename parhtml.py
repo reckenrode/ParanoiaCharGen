@@ -53,9 +53,19 @@ class ParanoiaParser(HTMLParser, object):
             s = '<table class="skill"><thead><caption>%s</caption></thead>\n' % escape(skill.name.capitalize())
             s += '<tbody class="specs">'
             for spec in skill:
-                s += "<tr><td>%s</td><td>%s</td></tr>\n" % (escape(spec.capitalize()), skill[spec])
+                s += '<tr><td>%s</td><td>%s</td></tr>\n' % (escape(spec.capitalize()), skill[spec])
             s += '</tbody>\n</table>'
             self.procs['skill-table=%s?' % skill.name] = lambda s=s: sys.stdout.write(s)
+        self.procs['service-group?'] = lambda: sys.stdout.write(self.expand_group(self.char.group))
+            
+    def expand_group(self, group):
+        s = '<div class="group">%s<div class="firm">%s</div>' % (escape(group.group), escape(group.firm))
+        if group.spyfor != None:
+            s += '<div class="spyfor">%s</div>' % self.expand_group(group.spyfor)
+            if group.spyon != None:
+                s += '<div class="spyon">%s</div>' % self.expand_group(group.spyon)
+        s += '</div>'
+        return s
 
 
 if __name__ == '__main__':

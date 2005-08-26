@@ -9,5 +9,6 @@
 <?skill-table=hardware?>
 <?skill-table=software?>
 <?skill-table=wetware?>
+<?service-group?>
 </body>
 </html>
