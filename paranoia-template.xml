@@ -1,14 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head><?make-random-char?><title><?name?></title></head>
+<head><?make-random-char?><title><?name?></title><link href="style.css" rel="stylesheet" type="text/css"/></head>
 <body>
-<h1>Name <?name?></h1>
+<div class="name"><?name?></div>
+<div class="skills">
+<div class="action">
 <?skill-table=management?>
 <?skill-table=stealth?>
 <?skill-table=violence?>
+</div>
+<div class="knowledge">
 <?skill-table=hardware?>
 <?skill-table=software?>
 <?skill-table=wetware?>
+</div>
+</div>
 <?service-group?>
 </body>
 </html>

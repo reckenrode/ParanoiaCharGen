@@ -68,13 +68,13 @@ class Character(object):
 
 def pick_svc_group():
     group = weighted_groups[random.randint(0, 19)]
-    
+
     # There are some special cases we need to handle
     if group[1] == 'Armed Forces' and random.randint(0, 2) == 0: # ~33% chance of not having a firm
         return (group[1], None, None, None)
     elif group[1] == 'Internal Security' and random.randint(0, 1) == 0: # 50% of spying
         cover = pick_svc_group()
-        return (cover[1], get_svc_firm(group[2]), 'Internal Security', None)
+        return (cover[1], get_svc_firm(group[2]), ServiceGroup(('Internal Security', None, None, None)), None)
     elif group[1] == 'Industrial spy or saboteur':
         spyfor = pick_svc_group()
         print spyfor
@@ -83,7 +83,7 @@ def pick_svc_group():
         return ('Industrial spy or saboteur', None, ServiceGroup(spyfor), ServiceGroup(spyon))
     else:
         return (group[1], get_svc_firm(group[2]), None, None)
-        
+
 
 def get_svc_firm(group):
     return random.choice(globals()[group+'_firms'])
@@ -137,5 +137,5 @@ def make_random_char():
     # vital speciality!
     char.skills.violence['energy weapons'] += 4
     char.group = ServiceGroup(pick_svc_group())
-    
+
     return char

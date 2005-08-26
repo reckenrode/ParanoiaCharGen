@@ -1,0 +1,94 @@
+.name {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.name:before {
+	content: 'Name: ';
+}
+
+
+.group {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.group .group {
+	position: static;
+}
+
+
+.group:before {
+	content: 'Service Group: ';
+}
+
+.group[title="cover"]:before {
+	content: 'Cover Group: ';
+}
+
+
+.spyfor .group:before {
+	content: 'Spying for: ';
+}
+
+.spyon .group:before {
+	content: 'Spying on: ';
+}
+
+
+.firm:before {
+	content: 'Service Firm: ';
+}
+
+
+.skills {
+	display: table;
+	margin-top: 4em;
+}
+
+table.skill caption {
+	font-weight: bold;
+	font-size: 123%;
+	text-align: left;
+}
+
+table.skill td {
+	padding-left: 0.25em;
+}
+
+table.skill tr:first-child {
+	border-top: 1px solid black;
+}
+
+table.skill td:first-child:after {
+	content: ': ';
+}
+
+
+.skill {
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	display: table-cell;
+	padding: 0.5em;
+	vertical-align: top;	
+}
+
+.skill:first-child {
+	border-left: 1px solid black;
+}
+
+
+.action {
+	display: table-row;
+}
+
+
+.knowledge {
+	display: table-row;
+}
+
+.knowledge > .skill {
+	border-bottom: 1px solid black;
+}

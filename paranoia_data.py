@@ -44,42 +44,42 @@ weighted_groups = reduce(operator.add, ([g for w in xrange(g[0])] for g in group
 
 
 af_firms = ['Ammunition Fresheners', 'Armed Forces Friends Network',
-             'Bodygaurd Communications Liaisons', 'Blast Shield Maintenance',
-             'Crowd Control (Armed Forces)', 'Sensitivity Trainers', 'Threat Assessors (Armed Forces)'
-             'Tool & Die Works', 'Vulture Squadron Recruiters', 'DM\u2019s Choice']
+            'Bodygaurd Communications Liaisons', 'Blast Shield Maintenance',
+            'Crowd Control (Armed Forces)', 'Sensitivity Trainers', 'Threat Assessors (Armed Forces)'
+            'Tool & Die Works', 'Vulture Squadron Recruiters']
 
 cpu_firms = ['116 Emergency Systems', 'Credit License Checkers',
-              'Facility Surveillance Control', 'Form Facilitators',
-              'Form Inventory Officers', 'Form Disposal Advisors',
-              'Pocket Protector Refurbishers', 'Security System Installers',
-              'Volunteer Collection Agencies', 'DM\u2019s Choice']
-              
+             'Facility Surveillance Control', 'Form Facilitators',
+             'Form Inventory Officers', 'Form Disposal Advisors',
+             'Pocket Protector Refurbishers', 'Security System Installers',
+             'Volunteer Collection Agencies']
+
 hpd_firms = ['Entertainment Scouting Agencies', 'History Purifiers',
-              'News Services', 'Public Hating Coordination',
-              'Psyche Ward Administration', 'Sector Expansion Surveyors',
-              'Semantics Control', 'Singalong Agents', 'Subliminals Police', 'DM\u2019s Choice']
-              
+             'News Services', 'Public Hating Coordination',
+             'Psyche Ward Administration', 'Sector Expansion Surveyors',
+             'Semantics Control', 'Singalong Agents', 'Subliminals Police']
+
 intsec_firms = ['Crowd Control (IntSec)', 'Forensic Analysis', 'Glee Quota Adjutants',
-                 'Re-Education Client Procurement', 'Surveillance Operatives',
-                 'Termination Center Janitorial', 'Thought Surveyors',
-                 'Threat Assessors (IntSec)', 'Treason Scene Cleanup', 'DM\u2019s Choice']
-                 
+                'Re-Education Client Procurement', 'Surveillance Operatives',
+                'Termination Center Janitorial', 'Thought Surveyors',
+                'Threat Assessors (IntSec)', 'Treason Scene Cleanup']
+
 plc_firms = ['Armored Autocar Escorts', 'BLUE Room Caterers', 'Equipment Assembly Control',
-              'Field Logistics Advisors', 'Food Vat Control', 'Inventory System Updaters',
-              'Printing Office Field Checkers', 'Storage Media Integrity Assessors',
-              'Warehouse System Inspectors', 'DM\u2019s Choice']
-              
+             'Field Logistics Advisors', 'Food Vat Control', 'Inventory System Updaters',
+             'Printing Office Field Checkers', 'Storage Media Integrity Assessors',
+             'Warehouse System Inspectors']
+
 pow_firms = ['Battery Backup', 'Bum Radius Assessors', 'Circuit Maintenance',
-              'Fuel Cell Replenishment (Power)', 'Fuel Rod Disposal Consultants',
+             'Fuel Cell Replenishment (Power)', 'Fuel Rod Disposal Consultants',
              'Odor Fresheners', 'Power Oscillation Professionals', 'Safe Atoms Initiative',
-             'Wire Supply Checkers', 'DM\u2019s Choice']
-             
+             'Wire Supply Checkers']
+
 rnd_firms = ['Biological Niceness Indexers', 'Bot Processing', 'Drug Interaction Testers',
-              'Field Data Collectors', 'Goo Cleanup', 'RoboPsych Auditing',
-              'Scienctist Sanity Checkers', 'Vehicle Therapists',
-              'Weapon Effectiveness Assessors', 'DM\u2019s Choice']
-              
+             'Field Data Collectors', 'Goo Cleanup', 'RoboPsych Auditing',
+             'Scienctist Sanity Checkers', 'Vehicle Therapists',
+             'Weapon Effectiveness Assessors']
+
 tech_firms = ['Bedding Inspectors', 'Clone Tank Support Services',
-               'Consolidated Motorized Transport (CMT)', 'Fuel Cell Replenishment (Tech Svcs)',
+              'Consolidated Motorized Transport (CMT)', 'Fuel Cell Replenishment (Tech Svcs)',
               'MemoMax Quality Assurance', 'Medical Services', 'Paint Control',
               'Slime Identification', 'Tech Support']
