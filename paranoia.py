@@ -5,35 +5,54 @@ import random, operator
 from paranoia_data import *
 
 
+def lookup(list, group):
+    """Returns the list belonging to the specified group."""
+    return globals()["%s_%s" % (what, group)]
+
+
+def getlists(group):
+    """Returns all lists of items that belong to the specified group."""
+    mtch = "_%s" % group
+    return [g for x, g in globals().iteritems() if x[-6:] == mtch]
+
+
 class ServiceGroup(object):
-    def __init__(self, group = None):
-        if group != None:
-            self.group, self.firm, self.spyfor, self.spyon = group
-        else:
-            self.group, self.firm, self.spyfor, self.spyon = (None, None, None, None)
+    """Represents a service group in Alpha Complex. This includes any
+    industrial espionage activies and the appropriate cover."""
+    def __init__(self, **kwargs):
+        self.cover = kwargs.get('cover', None)
+        self.coverfirm = kwargs.get('coverfirm', None)
+        self.group = kwargs.get('group', None)
+        self.firm = kwargs.get('firm', None)
+        self.spyfor = kwargs.get('spyfor', None)
+        self.spyon = kwargs.get('spyon', None)
 
 
 class Skill(object):
+    """Represents a character's skill and any of its associated specs."""
     def __init__(self, name, defvalue, specs):
         self.name = name
         self.value = defvalue
         self.__specs = dict([(s, defvalue) for s in specs])
 
     def __iter__(self):
+        """Returns an iterator to the skill's specs"""
         return iter(self.__specs)
 
-    def __setitem__(self, idx, val):
-        self.__specs[idx] = val
+    def __setitem__(self, spec, value):
+        """Sets the value of the spec to that specified by value. If the spec
+        does not belong to the Skill, KeyError will be raised."""
+        self.__specs[spec] = value
 
 
-    def __getitem__(self, idx):
-        return self.__specs[idx]
-
-    def __repr__(self):
-        return '%s: %i, %s' % (self.name, self.value, self.__specs)
+    def __getitem__(self, spec):
+        """Returns the value of the specified spec. If the spec
+        does not belong to the Skill, KeyError will be raised."""
+        return self.__specs[spec]
 
 
 class SkillProps(type):
+    """Metaclass used to add properties for the skills in a SkillCollection"""
     def __init__(cls, name, bases, dict):
         super(SkillProps, cls).__init__(name, bases, dict)
         for sk in knowledge_skills + action_skills:
@@ -41,54 +60,58 @@ class SkillProps(type):
 
 
 class SkillCollection(object):
+    """Represents a Character's set of skills"""
     __metaclass__ = SkillProps
 
     def __init__(self):
-        self.__skills = dict([(sk, Skill(sk, 0, [s for s in globals()[sk+'_specs']]))
+        self.__skills = dict([(sk, Skill(sk, 0, [s for s in lookup(sk, 'specs')]))
                                  for sk in action_skills + knowledge_skills])
 
     def __iter__(self):
+        """Returns an iterator over the skills in the collection"""
         return self.__skills.itervalues()
-
-    def __repr__(self):
-        return repr(self.__skills)
-
-    def __str__(self):
-        return str(self.__skills)
 
 
 class Character(object):
+    """Represents a troubleshooter in Alpha Complex. By default, the 
+    troubleshooter is not a commie mutant traitor."""
     def __init__(self):
         self.skills = SkillCollection()
         self.group = ServiceGroup()
 
-    def __repr__(self):
-        return '\n'.join([`x` for x in self.skills])
-
 
 def pick_svc_group():
+    """Returns a randomly chosen service group and firm for the character. If
+    the character be a spy, pick_svc_group will also choose his target and
+    cover."""
     group = weighted_groups[random.randint(0, 19)]
 
     # There are some special cases we need to handle
     if group[1] == 'Armed Forces' and random.randint(0, 2) == 0: # ~33% chance of not having a firm
-        return (group[1], None, None, None)
+        return ServiceGroup(group = group[1], firm = 'the military')
     elif group[1] == 'Internal Security' and random.randint(0, 1) == 0: # 50% of spying
         cover = pick_svc_group()
-        return (cover[1], get_svc_firm(group[2]), ServiceGroup(('Internal Security', None, None, None)), None)
+        while cover.group == None:
+            cover = pick_svc_group()
+        return ServiceGroup(cover = cover.group, coverfirm = cover.firm,
+            spyfor = ServiceGroup(group = 'Internal Security', firm = get_svc_firm('intsec')),
+            spyon = ServiceGroup(group = 'everyone'))
     elif group[1] == 'Industrial spy or saboteur':
         spyfor = pick_svc_group()
-        print spyfor
         spyon = pick_svc_group()
-        print spyon
-        return ('Industrial spy or saboteur', None, ServiceGroup(spyfor), ServiceGroup(spyon))
+        spyon.firm = None
+        return ServiceGroup(spyfor = spyfor, spyon = spyon)
     else:
-        return (group[1], get_svc_firm(group[2]), None, None)
+        return ServiceGroup(group = group[1], firm = get_svc_firm(group[2]))
 
 
 def get_svc_firm(group):
-    return random.choice(globals()[group+'_firms'])
+    """Returns a random service firm associated with the specified group."""
+    return random.choice(lookup(group, 'firms'))
 
 def make_random_char():
+    """Returns a new troubleshooter to serve Friend Computer. Termination of
+    commie mutant traitors that may be generated is left up to the user."""
     char = Character()
 
     for skill in char.skills:
@@ -98,11 +121,9 @@ def make_random_char():
             rating = 4
         for spec in skill:
             skill[spec] = rating
-
-# Here we want a list of all the skills a character might have.
-# The generator expression gives us an iterator over each list, and reduce
-# adds each item to the final list
-    tmp_spec_list = reduce(operator.add, [globals()[x] for x in globals() if x[-6:] == '_specs'])
+    
+    # put all of the spec lists into one big list
+    tmp_spec_list = reduce(operator.add, getlists('specs'))
 
     random.shuffle(tmp_spec_list)
     tmp_spec_list.remove('energy weapons')
@@ -136,6 +157,6 @@ def make_random_char():
 
     # vital speciality!
     char.skills.violence['energy weapons'] += 4
-    char.group = ServiceGroup(pick_svc_group())
+    char.group = pick_svc_group()
 
     return char

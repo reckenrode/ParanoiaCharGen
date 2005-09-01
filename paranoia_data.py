@@ -45,7 +45,7 @@ weighted_groups = reduce(operator.add, [[g for w in xrange(g[0])] for g in group
 
 af_firms = ['Ammunition Fresheners', 'Armed Forces Friends Network',
             'Bodygaurd Communications Liaisons', 'Blast Shield Maintenance',
-            'Crowd Control (Armed Forces)', 'Sensitivity Trainers', 'Threat Assessors (Armed Forces)'
+            'Crowd Control', 'Sensitivity Trainers', 'Threat Assessors',
             'Tool & Die Works', 'Vulture Squadron Recruiters']
 
 cpu_firms = ['116 Emergency Systems', 'Credit License Checkers',
@@ -59,10 +59,10 @@ hpd_firms = ['Entertainment Scouting Agencies', 'History Purifiers',
              'Psyche Ward Administration', 'Sector Expansion Surveyors',
              'Semantics Control', 'Singalong Agents', 'Subliminals Police']
 
-intsec_firms = ['Crowd Control (IntSec)', 'Forensic Analysis', 'Glee Quota Adjutants',
+intsec_firms = ['Crowd Control', 'Forensic Analysis', 'Glee Quota Adjutants',
                 'Re-Education Client Procurement', 'Surveillance Operatives',
                 'Termination Center Janitorial', 'Thought Surveyors',
-                'Threat Assessors (IntSec)', 'Treason Scene Cleanup']
+                'Threat Assessors', 'Treason Scene Cleanup']
 
 plc_firms = ['Armored Autocar Escorts', 'BLUE Room Caterers', 'Equipment Assembly Control',
              'Field Logistics Advisors', 'Food Vat Control', 'Inventory System Updaters',
@@ -70,7 +70,7 @@ plc_firms = ['Armored Autocar Escorts', 'BLUE Room Caterers', 'Equipment Assembl
              'Warehouse System Inspectors']
 
 pow_firms = ['Battery Backup', 'Bum Radius Assessors', 'Circuit Maintenance',
-             'Fuel Cell Replenishment (Power)', 'Fuel Rod Disposal Consultants',
+             'Fuel Cell Replenishment', 'Fuel Rod Disposal Consultants',
              'Odor Fresheners', 'Power Oscillation Professionals', 'Safe Atoms Initiative',
              'Wire Supply Checkers']
 
@@ -80,6 +80,6 @@ rnd_firms = ['Biological Niceness Indexers', 'Bot Processing', 'Drug Interaction
              'Weapon Effectiveness Assessors']
 
 tech_firms = ['Bedding Inspectors', 'Clone Tank Support Services',
-              'Consolidated Motorized Transport (CMT)', 'Fuel Cell Replenishment (Tech Svcs)',
+              'Consolidated Motorized Transport (CMT)', 'Fuel Cell Replenishment',
               'MemoMax Quality Assurance', 'Medical Services', 'Paint Control',
               'Slime Identification', 'Tech Support']

@@ -2,7 +2,7 @@
 
 from HTMLParser import HTMLParser, HTMLParseError
 from xml.sax.saxutils import escape
-import paranoia, sys
+import cgi_buffer, namegen, paranoia, sys
 
 class ParanoiaParser(HTMLParser, object):
     def __init__(self):
@@ -47,27 +47,32 @@ class ParanoiaParser(HTMLParser, object):
         self.char = paranoia.make_random_char()
 
         self.reset_procs()
-        self.procs['name?'] = lambda: sys.stdout.write('ABC-"John-1')
+        self.procs['name?'] = lambda name = namegen.random_name(): sys.stdout.write(name)
         for skill in self.char.skills:
-            s = '<table class="skill"><caption>%s</caption>\n' % escape(skill.name.capitalize())
+            s = '<table class="skill"><caption>%s</caption>\n' % escape(skill.name.title())
             s += '<tbody class="specs">'
             for spec in skill:
-                s += '<tr><td>%s</td><td>%s</td></tr>\n' % (escape(spec.capitalize()), skill[spec])
+                s += '<tr><td>%s</td><td>%s</td></tr>\n' % (escape(spec.title()), skill[spec])
             s += '</tbody>\n</table>'
             self.procs['skill-table=%s?' % skill.name] = lambda s=s: sys.stdout.write(s)
         self.procs['service-group?'] = lambda: sys.stdout.write(self.expand_group(self.char.group))
 
-    def expand_group(self, group):
-        s = '<div class="group"'
+    def expand_group(self, group, depth=0):
+        s = '<div class="'
         if group.spyfor != None:
-                s += ' title="cover"'
-        s += '>%s' % escape(group.group)
+            s += 'spy"'
+            if group.cover != None:
+                s += ' cover="%s" coverfirm="%s">' % (group.cover, group.coverfirm)
+            else:
+                s += '>'
+        else:
+            s += 'group">%s' % escape(group.group)
         if group.firm != None:
             s += '<div class="firm">%s</div>' % escape(group.firm)
         if group.spyfor != None:
-            s += '<div class="spyfor">%s</div>' % self.expand_group(group.spyfor)
+            s += '<div class="spyfor">%s</div>' % self.expand_group(group.spyfor, depth+1)
             if group.spyon != None:
-                s += '<div class="spyon">%s</div>' % self.expand_group(group.spyon)
+                s += '<div class="spyon">%s</div>' % self.expand_group(group.spyon, depth+1)
         s += '</div>'
         return s
 

@@ -1,94 +1,122 @@
+/* Layout */
+.affiliations, .action, .action:before, .knowledge, .knowledge:before, .skill {
+	float: left;
+}
+
+.firm, .spy, .group, .spyfor, .spyon {
+	display: inline;
+}
+
+.affiliations, .skill:first-child {
+	clear: left;
+}
+
+.affiliations, .skills {
+	padding-top: 1em;
+}
+
 .name {
-	position: absolute;
-	top: 0;
-	left: 0;
+	font-size: 123%;
+}
+
+.affiliations:before, .skill caption {
+	font-size: 123%;
+	font-weight: bold;
+}
+
+.action, .knowledge {
+	margin-top: 0.5em;
+	width: 100%;
+}
+
+.action:before, .knowledge:before {
+	background: black;
+	border: 1px solid black;
+	color: white;
+	font-size: 150%;
+	font-weight: bold;
+	padding: 0 0.2em;
+}
+
+.skill, .skill caption  {
+	border-right: 1px solid black;
+}
+
+.skill caption {
+	border-top: 1px solid black;
+	padding: 0 0.25em;
+}
+
+.skill {
+	padding: 0 0.75em;
+	width: 33.3%;
+}
+
+.skill:last-child, .skill:last-child caption {
+	border-right: none;
+}
+
+.skill tr > td, .skill caption {
+	text-align: left;
+}
+
+.skill tr > td + td {
+	text-align: right;
+}
+
+/* Generated Content */
+.action:before {
+	content: 'Action Skills';
+}
+
+.affiliations:before {
+	content: 'Service Groups & Secret Societies';
+	display: block;
+}
+
+.firm:before {
+	content: ' in ';
+}
+
+.firm:after, .spyon > .group:after {
+	content: '. ';
+}
+
+.group:before {
+	content: 'You are working for ';
+}
+
+.spyon .spy .spyfor .group:before {
+	content: 'Working for ';
+}
+
+.spyon .spy .spyfor .firm:after {
+	content: ' is your cover, ';
+}
+
+.spyon .spy .spyon .group:before {
+	content: 'and ';
+}
+.spyon .spy .spyon .group:after {
+	content: ' is your target. ';
+}
+
+.knowledge:before {
+	content: 'Knowledge Skills';
 }
 
 .name:before {
 	content: 'Name: ';
 }
 
-
-.group {
-	position: absolute;
-	top: 0;
-	right: 0;
+.spyfor > .group:before {
+	content: 'You are a spy for ';
 }
 
-.group .group {
-	position: static;
+.spyon > .group:before {
+	content: 'You are spying on ';
 }
 
-
-.group:before {
-	content: 'Service Group: ';
-}
-
-.group[title="cover"]:before {
-	content: 'Cover Group: ';
-}
-
-
-.spyfor .group:before {
-	content: 'Spying for: ';
-}
-
-.spyon .group:before {
-	content: 'Spying on: ';
-}
-
-
-.firm:before {
-	content: 'Service Firm: ';
-}
-
-
-.skills {
-	display: table;
-	margin-top: 4em;
-}
-
-table.skill caption {
-	font-weight: bold;
-	font-size: 123%;
-	text-align: left;
-}
-
-table.skill td {
-	padding-left: 0.25em;
-}
-
-table.skill tr:first-child {
-	border-top: 1px solid black;
-}
-
-table.skill td:first-child:after {
-	content: ': ';
-}
-
-
-.skill {
-	border-top: 1px solid black;
-	border-right: 1px solid black;
-	display: table-cell;
-	padding: 0.5em;
-	vertical-align: top;	
-}
-
-.skill:first-child {
-	border-left: 1px solid black;
-}
-
-
-.action {
-	display: table-row;
-}
-
-
-.knowledge {
-	display: table-row;
-}
-
-.knowledge > .skill {
-	border-bottom: 1px solid black;
+.spy[cover]:after {
+	content: 'Your cover is 'attr(cover)' in 'attr(coverfirm)'. ';
 }
