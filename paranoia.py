@@ -74,7 +74,6 @@ def pick_svc_group():
     the character be a spy, pick_svc_group will also choose his target and
     cover."""
     group = weighted_groups[random.randint(0, 19)]
-    print group
     # There are some special cases we need to handle
     if group == 'Armed Forces' and random.randint(0, 2) == 0: # ~33% chance of not having a firm
         return ServiceGroup(group = group, firm = 'the military')
