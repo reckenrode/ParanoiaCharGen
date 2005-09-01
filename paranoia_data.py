@@ -1,85 +1,95 @@
 import operator
 
-management_specs = [ 'bootlicking', 'chutzpah', 'hygiene', 'con games',
-                     'interrogation', 'intimidation', 'moxie', 'oratory' ]
-
-stealth_specs = [ 'concealment', 'disguise', 'high alert',
+specs = {
+    'management': [ 'bootlicking', 'chutzpah', 'hygiene', 'con games',
+                  'interrogation', 'intimidation', 'moxie', 'oratory' ],
+    'stealth': [ 'concealment', 'disguise', 'high alert',
                   'security systems', 'shadowing', 'slight of hand',
-                  'sneaking', 'surveilance' ]
-
-violence_specs = [ 'agility', 'energy weapons', 'demolition',
+                  'sneaking', 'surveilance' ],
+    'violence': ['agility', 'energy weapons', 'demolition',
                    'field weapons', 'fine manipulation', 'hand weapons',
                    'projectile weapons', 'thrown weapons',
-                   'unarmed combat', 'vehicular combat' ]
+                   'unarmed combat', 'vehicular combat' ],
 
-hardware_specs = [ 'bot ops & maintenance', 'chemical engineering',
+    'hardware': ['bot ops & maintenance', 'chemical engineering',
                    'electronic engineering', 'habitat engineering',
                    'mechanical engineering', 'nuclear engineering',
                    'vehicle ops & maintenance',
-                   'weapons & armor maintenance']
+                   'weapons & armor maintenance'],
 
-software_specs = [ 'bot programming', 'c-bay', 'data analysis',
+    'software': ['bot programming', 'c-bay', 'data analysis',
                    'data search', 'financial systems', 'hacking',
-                   'operating systems', 'vehicle programming' ]
+                   'operating systems', 'vehicle programming'],
 
-wetware_specs = [ 'biosciences', 'bioweapons', 'cloning', 'medical',
+    'wetware': ['biosciences', 'bioweapons', 'cloning', 'medical',
                   'outdoor life', 'pharmatherapy', 'psychotherapy',
-                  'suggestion' ]
+                  'suggestion']
+}
 
 action_skills = ['management', 'stealth', 'violence']
 knowledge_skills = ['hardware', 'software', 'wetware']
 
-# groups is a list of 3-tuples (probability, name, short name)
-groups = [(3, 'Armed Forces', 'af'),
-          (2, 'Central Processing Unit', 'cpu'),
-          (3, 'HPD & Mind Control', 'hpd'),
-          (2, 'Internal Security', 'intsec'),
-          (3, 'Production, Logistics & Commissary', 'plc'),
-          (2, 'Power Services', 'pow'),
-          (2, 'Research & Design', 'rnd'),
-          (2, 'Technical Services', 'tech'),
-          (1, 'Industrial spy or saboteur', 'spy')]
-
-weighted_groups = reduce(operator.add, [[g for w in xrange(g[0])] for g in groups])
-
-
-af_firms = ['Ammunition Fresheners', 'Armed Forces Friends Network',
+groups = {
+    'Armed Forces': {
+        'weight': 3,
+        'firms': ['Ammunition Fresheners', 'Armed Forces Friends Network',
             'Bodygaurd Communications Liaisons', 'Blast Shield Maintenance',
             'Crowd Control', 'Sensitivity Trainers', 'Threat Assessors',
             'Tool & Die Works', 'Vulture Squadron Recruiters']
-
-cpu_firms = ['116 Emergency Systems', 'Credit License Checkers',
-             'Facility Surveillance Control', 'Form Facilitators',
-             'Form Inventory Officers', 'Form Disposal Advisors',
-             'Pocket Protector Refurbishers', 'Security System Installers',
-             'Volunteer Collection Agencies']
-
-hpd_firms = ['Entertainment Scouting Agencies', 'History Purifiers',
+    },
+    'Central Processing Unit': {
+        'weight': 2,
+        'firms': ['Ammunition Fresheners', 'Armed Forces Friends Network',
+            'Bodygaurd Communications Liaisons', 'Blast Shield Maintenance',
+            'Crowd Control', 'Sensitivity Trainers', 'Threat Assessors',
+            'Tool & Die Works', 'Vulture Squadron Recruiters']
+    },
+    'HPD & Mind Control': {
+        'weight': 3,
+        'firms': ['Entertainment Scouting Agencies', 'History Purifiers',
              'News Services', 'Public Hating Coordination',
              'Psyche Ward Administration', 'Sector Expansion Surveyors',
              'Semantics Control', 'Singalong Agents', 'Subliminals Police']
+    },
+    'Internal Security': {
+        'weight': 2,
+        'firms': ['Crowd Control', 'Forensic Analysis', 'Glee Quota Adjutants',
+                    'Re-Education Client Procurement', 'Surveillance Operatives',
+                    'Termination Center Janitorial', 'Thought Surveyors',
+                    'Threat Assessors', 'Treason Scene Cleanup']
+        },
+    'Production, Logistics & Commissary': {
+        'weight': 3,
+        'firms': ['Armored Autocar Escorts', 'BLUE Room Caterers', 'Equipment Assembly Control',
+                 'Field Logistics Advisors', 'Food Vat Control', 'Inventory System Updaters',
+                 'Printing Office Field Checkers', 'Storage Media Integrity Assessors',
+                 'Warehouse System Inspectors']
+    },
+    'Power Services': {
+        'weight': 2,
+        'firms': ['Battery Backup', 'Bum Radius Assessors', 'Circuit Maintenance',
+                 'Fuel Cell Replenishment', 'Fuel Rod Disposal Consultants',
+                 'Odor Fresheners', 'Power Oscillation Professionals', 'Safe Atoms Initiative',
+                 'Wire Supply Checkers']
+    },
+    'Research & Design': {
+        'weight': 2,
+        'firms': ['Biological Niceness Indexers', 'Bot Processing', 'Drug Interaction Testers',
+                 'Field Data Collectors', 'Goo Cleanup', 'RoboPsych Auditing',
+                 'Scienctist Sanity Checkers', 'Vehicle Therapists',
+                 'Weapon Effectiveness Assessors']
+    },
+    'Technical Services': {
+        'weight': 2,
+        'firms': ['Bedding Inspectors', 'Clone Tank Support Services',
+                  'Consolidated Motorized Transport (CMT)', 'Fuel Cell Replenishment',
+                  'MemoMax Quality Assurance', 'Medical Services', 'Paint Control',
+                  'Slime Identification', 'Tech Support']
+    },
+    'Industrial spy or saboteur': {
+        'weight': 1,
+        'firms': []
+    }
+}
 
-intsec_firms = ['Crowd Control', 'Forensic Analysis', 'Glee Quota Adjutants',
-                'Re-Education Client Procurement', 'Surveillance Operatives',
-                'Termination Center Janitorial', 'Thought Surveyors',
-                'Threat Assessors', 'Treason Scene Cleanup']
-
-plc_firms = ['Armored Autocar Escorts', 'BLUE Room Caterers', 'Equipment Assembly Control',
-             'Field Logistics Advisors', 'Food Vat Control', 'Inventory System Updaters',
-             'Printing Office Field Checkers', 'Storage Media Integrity Assessors',
-             'Warehouse System Inspectors']
-
-pow_firms = ['Battery Backup', 'Bum Radius Assessors', 'Circuit Maintenance',
-             'Fuel Cell Replenishment', 'Fuel Rod Disposal Consultants',
-             'Odor Fresheners', 'Power Oscillation Professionals', 'Safe Atoms Initiative',
-             'Wire Supply Checkers']
-
-rnd_firms = ['Biological Niceness Indexers', 'Bot Processing', 'Drug Interaction Testers',
-             'Field Data Collectors', 'Goo Cleanup', 'RoboPsych Auditing',
-             'Scienctist Sanity Checkers', 'Vehicle Therapists',
-             'Weapon Effectiveness Assessors']
-
-tech_firms = ['Bedding Inspectors', 'Clone Tank Support Services',
-              'Consolidated Motorized Transport (CMT)', 'Fuel Cell Replenishment',
-              'MemoMax Quality Assurance', 'Medical Services', 'Paint Control',
-              'Slime Identification', 'Tech Support']
+weighted_groups = reduce(operator.add, [[g for w in xrange(v['weight'])] for g, v in groups.iteritems()])

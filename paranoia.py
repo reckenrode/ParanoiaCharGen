@@ -5,17 +5,6 @@ import random, operator
 from paranoia_data import *
 
 
-def lookup(list, group):
-    """Returns the list belonging to the specified group."""
-    return globals()["%s_%s" % (what, group)]
-
-
-def getlists(group):
-    """Returns all lists of items that belong to the specified group."""
-    mtch = "_%s" % group
-    return [g for x, g in globals().iteritems() if x[-6:] == mtch]
-
-
 class ServiceGroup(object):
     """Represents a service group in Alpha Complex. This includes any
     industrial espionage activies and the appropriate cover."""
@@ -64,7 +53,7 @@ class SkillCollection(object):
     __metaclass__ = SkillProps
 
     def __init__(self):
-        self.__skills = dict([(sk, Skill(sk, 0, [s for s in lookup(sk, 'specs')]))
+        self.__skills = dict([(sk, Skill(sk, 0, [s for s in specs[sk]]))
                                  for sk in action_skills + knowledge_skills])
 
     def __iter__(self):
@@ -85,29 +74,29 @@ def pick_svc_group():
     the character be a spy, pick_svc_group will also choose his target and
     cover."""
     group = weighted_groups[random.randint(0, 19)]
-
+    print group
     # There are some special cases we need to handle
-    if group[1] == 'Armed Forces' and random.randint(0, 2) == 0: # ~33% chance of not having a firm
-        return ServiceGroup(group = group[1], firm = 'the military')
-    elif group[1] == 'Internal Security' and random.randint(0, 1) == 0: # 50% of spying
+    if group == 'Armed Forces' and random.randint(0, 2) == 0: # ~33% chance of not having a firm
+        return ServiceGroup(group = group, firm = 'the military')
+    elif group == 'Internal Security' and random.randint(0, 1) == 0: # 50% of spying
         cover = pick_svc_group()
         while cover.group == None:
             cover = pick_svc_group()
         return ServiceGroup(cover = cover.group, coverfirm = cover.firm,
-            spyfor = ServiceGroup(group = 'Internal Security', firm = get_svc_firm('intsec')),
+            spyfor = ServiceGroup(group = group, firm = get_svc_firm(group)),
             spyon = ServiceGroup(group = 'everyone'))
-    elif group[1] == 'Industrial spy or saboteur':
+    elif group == 'Industrial spy or saboteur':
         spyfor = pick_svc_group()
         spyon = pick_svc_group()
         spyon.firm = None
         return ServiceGroup(spyfor = spyfor, spyon = spyon)
     else:
-        return ServiceGroup(group = group[1], firm = get_svc_firm(group[2]))
+        return ServiceGroup(group = group, firm = get_svc_firm(group))
 
 
 def get_svc_firm(group):
     """Returns a random service firm associated with the specified group."""
-    return random.choice(lookup(group, 'firms'))
+    return random.choice(groups[group]['firms'])
 
 def make_random_char():
     """Returns a new troubleshooter to serve Friend Computer. Termination of
@@ -123,7 +112,7 @@ def make_random_char():
             skill[spec] = rating
     
     # put all of the spec lists into one big list
-    tmp_spec_list = reduce(operator.add, getlists('specs'))
+    tmp_spec_list = reduce(operator.add, specs.itervalues())
 
     random.shuffle(tmp_spec_list)
     tmp_spec_list.remove('energy weapons')
