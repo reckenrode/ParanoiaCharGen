@@ -7,4 +7,6 @@ def format_service_group(char):
 	return rstr % char.group.__dict__
 	
 def build_skill_table(skill):
-	return [[spec, skill[spec]] for spec in skill]
+	table = [[spec, skill[spec]] for spec in skill]
+	table.sort(lambda x, y: cmp(x[0], y[0]))
+	return table

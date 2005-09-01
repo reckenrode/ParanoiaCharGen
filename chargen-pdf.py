@@ -1,6 +1,9 @@
+#!/usr/bin/env python2
+
 from __future__ import division
 
-import paranoia, util
+import paranoia, util, sys
+sys.path.append('/home/demiurge/.site-packages/lib/python2.2/site-packages/')
 
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import inch
@@ -13,20 +16,26 @@ normal = styles['Normal']
 def escape(str):
 	return str.replace('&', '&amp;')
 
+def build_table(char, sklist):
+	return Table([[Table(util.build_skill_table(char.skills[skill])) for skill in sklist]])
+	
 char = paranoia.make_random_char()
 sheet = [
 	Paragraph('Name: %s' % char.name, normal),
 	Paragraph('Gender: %s' % char.gender, normal),
 	Paragraph(escape(util.format_service_group(char)), normal),
 	Paragraph('Action Skills', normal),
-	Table([[Table(util.build_skill_table(char.skills[skill])) for skill in paranoia.action_skills]]),
+	build_table(char, paranoia.action_skills),
 	Paragraph('Knowledge Skills', normal),
-	Table([[Table(util.build_skill_table(char.skills[skill])) for skill in paranoia.knowledge_skills]]),
+	build_table(char, paranoia.knowledge_skills),
 	Paragraph('Mutant power:', normal),
 	Paragraph('Secret society:', normal)
 ]
 	
-output = Canvas('char.pdf')
+print 'Content-Type: application/pdf'
+print
+
+output = Canvas(sys.stdout)
 frame = Frame(1/2 * inch, 1/2 * inch, 7.5 * inch, 10.5 * inch)
 frame.addFromList(sheet, output)
 output.save()
