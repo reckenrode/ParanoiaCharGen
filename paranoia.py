@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 from __future__ import division
-import random, operator
+import random, operator, namegen
 from paranoia_data import *
 
 
@@ -56,6 +56,9 @@ class SkillCollection(object):
         self.__skills = dict([(sk, Skill(sk, 0, [s for s in specs[sk]]))
                                  for sk in action_skills + knowledge_skills])
 
+    def __getitem__(self, key):
+        return self.__skills[key]
+        
     def __iter__(self):
         """Returns an iterator over the skills in the collection"""
         return self.__skills.itervalues()
@@ -67,6 +70,8 @@ class Character(object):
     def __init__(self):
         self.skills = SkillCollection()
         self.group = ServiceGroup()
+        self.name = ''
+        self.gender = ''
 
 
 def pick_svc_group():
@@ -81,7 +86,7 @@ def pick_svc_group():
         cover = pick_svc_group()
         while cover.group == None:
             cover = pick_svc_group()
-        return ServiceGroup(cover = cover.group, coverfirm = cover.firm,
+        return ServiceGroup(group = group, firm = firm, cover = cover.group, coverfirm = cover.firm,
             spyfor = ServiceGroup(group = group, firm = get_svc_firm(group)),
             spyon = ServiceGroup(group = 'everyone'))
     elif group == 'Industrial spy or saboteur':
@@ -101,6 +106,9 @@ def make_random_char():
     """Returns a new troubleshooter to serve Friend Computer. Termination of
     commie mutant traitors that may be generated is left up to the user."""
     char = Character()
+    
+    char.name = namegen.random_name()
+    char.gender = random.choice(['Male', 'Female', 'Other'])
 
     for skill in char.skills:
         # set skill base ratings
