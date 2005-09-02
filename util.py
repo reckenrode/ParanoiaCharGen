@@ -1,12 +1,14 @@
-def format_service_group(char):
+def format_service_group(group):
+	"""pretty prints the group"""
 	rstr = 'Service group: %(group)s [%(firm)s]'
-	if char.group.cover != None: # Spy for IntSec
+	if group.cover != None: # Spy for IntSec
 		rstr += ' (NOTE: As a spy for IntSec, your cover group is %(cover)s [%(coverfirm)s]'
-	elif char.group.spyon != None: # Spy
+	elif group.spyon != None: # Spy
 		rstr += ' (NOTE: You are a spy. Your target is %(spyon)s'
-	return rstr % char.group.__dict__
+	return rstr % group.__dict__
 	
 def build_skill_table(skill):
-	table = [[spec, skill[spec]] for spec in skill]
+	"""makes an nx2 table of the skill's specs where n = len(skill.specs)"""
+	table = [[spec.title(), skill[spec]] for spec in skill]
 	table.sort(lambda x, y: cmp(x[0], y[0]))
 	return table

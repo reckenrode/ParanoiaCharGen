@@ -35,60 +35,79 @@ groups = {
         'firms': ['Ammunition Fresheners', 'Armed Forces Friends Network',
             'Bodygaurd Communications Liaisons', 'Blast Shield Maintenance',
             'Crowd Control', 'Sensitivity Trainers', 'Threat Assessors',
-            'Tool & Die Works', 'Vulture Squadron Recruiters']
+            'Tool & Die Works', 'Vulture Squadron Recruiters'],
+         'specs': ['demolition', 'energy weapons', 'hand weapons', 'projectile weapons',
+                   'thrown weapons', 'unarmed combat', 'vehicle ops & maintenance']
     },
     'Central Processing Unit': {
         'weight': 2,
         'firms': ['Ammunition Fresheners', 'Armed Forces Friends Network',
             'Bodygaurd Communications Liaisons', 'Blast Shield Maintenance',
             'Crowd Control', 'Sensitivity Trainers', 'Threat Assessors',
-            'Tool & Die Works', 'Vulture Squadron Recruiters']
+            'Tool & Die Works', 'Vulture Squadron Recruiters'],
+         'specs': ['security systems', 'electronic engineering', 'bot programming',
+                   'data analysis', 'financial systems', 'data search', 'vehicle programming']
     },
     'HPD & Mind Control': {
         'weight': 3,
         'firms': ['Entertainment Scouting Agencies', 'History Purifiers',
              'News Services', 'Public Hating Coordination',
              'Psyche Ward Administration', 'Sector Expansion Surveyors',
-             'Semantics Control', 'Singalong Agents', 'Subliminals Police']
+             'Semantics Control', 'Singalong Agents', 'Subliminals Police'],
+         'specs': ['bootlicking', 'chutzpah', 'con games', 'moxie', 'bot ops & maintenance',
+                   'pharmatherapy', 'medical']
     },
     'Internal Security': {
         'weight': 2,
         'firms': ['Crowd Control', 'Forensic Analysis', 'Glee Quota Adjutants',
                     'Re-Education Client Procurement', 'Surveillance Operatives',
                     'Termination Center Janitorial', 'Thought Surveyors',
-                    'Threat Assessors', 'Treason Scene Cleanup']
+                    'Threat Assessors', 'Treason Scene Cleanup'],
+         'specs': ['interrogation', 'intimidation', 'security systems', 
+                   'surveilance', 'energy weapons', 'hand weapons', 'unarmed combat']
         },
     'Production, Logistics & Commissary': {
         'weight': 3,
         'firms': ['Armored Autocar Escorts', 'BLUE Room Caterers', 'Equipment Assembly Control',
                  'Field Logistics Advisors', 'Food Vat Control', 'Inventory System Updaters',
                  'Printing Office Field Checkers', 'Storage Media Integrity Assessors',
-                 'Warehouse System Inspectors']
+                 'Warehouse System Inspectors'],
+         'specs': ['chutzpah', 'con games', 'bot ops & maintenance', 'habitat engineering',
+                   'vehicle ops & maintenance', 'data search', 'biosciences']
     },
     'Power Services': {
         'weight': 2,
         'firms': ['Battery Backup', 'Bum Radius Assessors', 'Circuit Maintenance',
                  'Fuel Cell Replenishment', 'Fuel Rod Disposal Consultants',
                  'Odor Fresheners', 'Power Oscillation Professionals', 'Safe Atoms Initiative',
-                 'Wire Supply Checkers']
+                 'Wire Supply Checkers'],
+         'specs': ['data analysis', 'data search', 'chemical engineering',
+                   'electronic engineering', 'habitat engineering', 'mechanical engineering'
+                   'nuclear engineering']
     },
     'Research & Design': {
         'weight': 2,
         'firms': ['Biological Niceness Indexers', 'Bot Processing', 'Drug Interaction Testers',
                  'Field Data Collectors', 'Goo Cleanup', 'RoboPsych Auditing',
                  'Scienctist Sanity Checkers', 'Vehicle Therapists',
-                 'Weapon Effectiveness Assessors']
+                 'Weapon Effectiveness Assessors'],
+         'specs': ['chemical engineering', 'mechanical engineering', 'nuclear engineering',
+                   'bot programming', 'vehicle programming', 'bioweapons', 'cloning']
     },
     'Technical Services': {
         'weight': 2,
         'firms': ['Bedding Inspectors', 'Clone Tank Support Services',
                   'Consolidated Motorized Transport (CMT)', 'Fuel Cell Replenishment',
                   'MemoMax Quality Assurance', 'Medical Services', 'Paint Control',
-                  'Slime Identification', 'Tech Support']
+                  'Slime Identification', 'Tech Support'],
+         'specs': ['chemical engineering', 'electronic engineering', 'habitat engineering',
+                   'vehicle ops & maintenance', 'bot programming', 'vehicle programming',
+                   'pharmatherapy']
     },
     'Industrial spy or saboteur': {
         'weight': 1,
-        'firms': []
+        'firms': [],
+        'specs': []
     }
 }
 

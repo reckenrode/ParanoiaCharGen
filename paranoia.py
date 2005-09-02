@@ -110,6 +110,9 @@ def make_random_char():
     char.name = namegen.random_name()
     char.gender = random.choice(['Male', 'Female', 'Other'])
 
+    char.group = pick_svc_group()
+    grpspec = random.choice(groups[char.group.group]['specs'])
+    
     for skill in char.skills:
         # set skill base ratings
         rating = random.randint(1, 20) // 3
@@ -150,9 +153,20 @@ def make_random_char():
                     skill[spec] = 1
                     tmp_spec_list.remove(spec)
                     drops -= 1
+                    
+    try:
+        for skill in char.skills:
+            for spec in skill:
+                if spec == grpspec:
+                    skill[spec] += 4
+                    raise StopIteration()
+        else:
+            raise SyntaxError('Someone goofed when keying the data (grpspec = %s)' % grpspec)
+    except StopIteration:
+        pass
+    
 
     # vital speciality!
     char.skills.violence['energy weapons'] += 4
-    char.group = pick_svc_group()
 
     return char

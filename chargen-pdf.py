@@ -23,7 +23,7 @@ char = paranoia.make_random_char()
 sheet = [
 	Paragraph('Name: %s' % char.name, normal),
 	Paragraph('Gender: %s' % char.gender, normal),
-	Paragraph(escape(util.format_service_group(char)), normal),
+	Paragraph(escape(util.format_service_group(char.group)), normal),
 	Paragraph('Action Skills', normal),
 	build_table(char, paranoia.action_skills),
 	Paragraph('Knowledge Skills', normal),
