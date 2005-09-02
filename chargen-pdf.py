@@ -2,7 +2,7 @@
 
 from __future__ import division
 
-import paranoia, util, sys
+import cgi_buffer, paranoia, util, sys
 sys.path.append('/home/demiurge/.site-packages/lib/python2.2/site-packages/')
 
 from reportlab.lib.styles import getSampleStyleSheet
