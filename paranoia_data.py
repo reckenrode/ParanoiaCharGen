@@ -63,7 +63,7 @@ groups = {
                     'Re-Education Client Procurement', 'Surveillance Operatives',
                     'Termination Center Janitorial', 'Thought Surveyors',
                     'Threat Assessors', 'Treason Scene Cleanup'],
-         'specs': ['interrogation', 'intimidation', 'security systems', 
+         'specs': ['interrogation', 'intimidation', 'security systems',
                    'surveilance', 'energy weapons', 'hand weapons', 'unarmed combat']
         },
     'Production, Logistics & Commissary': {

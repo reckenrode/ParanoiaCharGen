@@ -58,14 +58,14 @@ class SkillCollection(object):
 
     def __getitem__(self, key):
         return self.__skills[key]
-        
+
     def __iter__(self):
         """Returns an iterator over the skills in the collection"""
         return self.__skills.itervalues()
 
 
 class Character(object):
-    """Represents a troubleshooter in Alpha Complex. By default, the 
+    """Represents a troubleshooter in Alpha Complex. By default, the
     troubleshooter is not a commie mutant traitor."""
     def __init__(self):
         self.skills = SkillCollection()
@@ -106,13 +106,13 @@ def make_random_char():
     """Returns a new troubleshooter to serve Friend Computer. Termination of
     commie mutant traitors that may be generated is left up to the user."""
     char = Character()
-    
+
     char.name = namegen.random_name()
     char.gender = random.choice(['Male', 'Female', 'Other'])
 
     char.group = pick_svc_group()
     grpspec = random.choice(groups[char.group.group]['specs'])
-    
+
     for skill in char.skills:
         # set skill base ratings
         rating = random.randint(1, 20) // 3
@@ -120,7 +120,7 @@ def make_random_char():
             rating = 4
         for spec in skill:
             skill[spec] = rating
-    
+
     # put all of the spec lists into one big list
     tmp_spec_list = reduce(operator.add, specs.itervalues())
 
@@ -153,7 +153,7 @@ def make_random_char():
                     skill[spec] = 1
                     tmp_spec_list.remove(spec)
                     drops -= 1
-                    
+
     try:
         for skill in char.skills:
             for spec in skill:
@@ -164,7 +164,7 @@ def make_random_char():
             raise SyntaxError('Someone goofed when keying the data (grpspec = %s)' % grpspec)
     except StopIteration:
         pass
-    
+
 
     # vital speciality!
     char.skills.violence['energy weapons'] += 4

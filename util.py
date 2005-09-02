@@ -6,7 +6,7 @@ def format_service_group(group):
 	elif group.spyon != None: # Spy
 		rstr += ' (NOTE: You are a spy. Your target is %(spyon)s'
 	return rstr % group.__dict__
-	
+
 def build_skill_table(skill):
 	"""makes an nx2 table of the skill's specs where n = len(skill.specs)"""
 	table = [[spec.title(), skill[spec]] for spec in skill]

@@ -18,7 +18,7 @@ def escape(str):
 
 def build_table(char, sklist):
 	return Table([[Table(util.build_skill_table(char.skills[skill])) for skill in sklist]])
-	
+
 char = paranoia.make_random_char()
 sheet = [
 	Paragraph('Name: %s' % char.name, normal),
@@ -31,7 +31,7 @@ sheet = [
 	Paragraph('Mutant power:', normal),
 	Paragraph('Secret society:', normal)
 ]
-	
+
 print 'Content-Type: application/pdf'
 print
 

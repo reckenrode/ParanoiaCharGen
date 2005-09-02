@@ -5,7 +5,7 @@ import string
 # inspired by http://mail.python.org/pipermail/tutor/2001-December/010650.html
 
 def count_lines(file):
-    """Given a file, returns the number of lines it contains.    
+    """Given a file, returns the number of lines it contains.
     The current file position should be preserved as long as the file
     supports tell() and seek()."""
     old_position = file.tell()
