@@ -82,7 +82,7 @@ groups = {
                  'Odor Fresheners', 'Power Oscillation Professionals', 'Safe Atoms Initiative',
                  'Wire Supply Checkers'],
          'specs': ['data analysis', 'data search', 'chemical engineering',
-                   'electronic engineering', 'habitat engineering', 'mechanical engineering'
+                   'electronic engineering', 'habitat engineering', 'mechanical engineering',
                    'nuclear engineering']
     },
     'Research & Design': {

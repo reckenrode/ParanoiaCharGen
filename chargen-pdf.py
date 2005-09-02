@@ -2,7 +2,7 @@
 
 from __future__ import division
 
-import cgi_buffer, paranoia, util, sys
+import cgi_buffer, paranoia, util, re, sys
 sys.path.append('/home/demiurge/.site-packages/lib/python2.2/site-packages/')
 
 from reportlab.lib.styles import getSampleStyleSheet
@@ -39,6 +39,7 @@ print
 
 output = Canvas(sys.stdout)
 output.setTitle(char.name)
-output.setAuthor('chargen-pdf.py $LastChangedRevision$')
+output.setAuthor('chargen-pdf rev. %s' % re.match('[^\d]*(\d*).*', '$LastChangedRevision$').groups()[0])
+output.setSubject('Troubleshooter')
 Frame(1/2 * inch, 1/2 * inch, 7.5 * inch, 10.5 * inch).addFromList(sheet, output)
 output.save()
