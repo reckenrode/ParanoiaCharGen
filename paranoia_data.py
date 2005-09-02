@@ -112,3 +112,22 @@ groups = {
 }
 
 weighted_groups = reduce(operator.add, [[g for w in xrange(v['weight'])] for g, v in groups.iteritems()])
+
+powers = {
+    'classic': ['Charm', 'Corrosion', 'Detect Mutant Power', 'Electroshock', 'Empathy',
+                'Energy Field', 'Hypersenses', 'Levitation', 'Machine Empathy',
+                'Matter Eater', 'Mental Blast', 'Polymorphism', 'Puppeteer',
+                'Pyrokinesis', 'Regeneration', 'Slippery Skin', 'Telekinesis',
+                'Teleportation', 'Uncanny Luck', 'X-Ray Vision'],                  
+    'straight': ['Adhesive Skin', 'Adrenalin Control', 'Bureaucratic Intuition',
+                 'Charm', 'Death Simulation', 'Deep Thought', 'Electroshock',
+                 'Empathy', 'Energy Field', 'Hypersenses', 'Machine Empathy',
+                 'Matter Eater', 'Mechanical Intuition', 'Mental Blast',
+                 'Pyrokinesis', 'Regeneration', 'Rubbery Bones', 'Toxic Metabolism',
+                 'Uncanny Luck', 'Ventriloquist'],
+    'zap': ['Absorption', 'Chameleon', 'Charm', 'Desolidity', 'Electroshock',
+            'Energy Field', 'Growth', 'Levitation', 'Machine Empathy',
+            'Matter Eater', 'Mental Blast', 'Polymorphism', 'Puppeteer',
+            'Pyrokinesis', 'Regeneration', 'Shrinking', 'Telekinesis',
+            'Teleportation', 'Transmutaiton', 'X-Ray Vision']
+}

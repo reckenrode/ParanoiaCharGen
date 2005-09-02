@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 from __future__ import division
-import random, operator, namegen
+import math, random, operator, namegen
 from paranoia_data import *
 
 
@@ -102,7 +102,7 @@ def get_svc_firm(group):
     """Returns a random service firm associated with the specified group."""
     return random.choice(groups[group]['firms'])
 
-def make_random_char():
+def make_random_char(style):
     """Returns a new troubleshooter to serve Friend Computer. Termination of
     commie mutant traitors that may be generated is left up to the user."""
     char = Character()
@@ -115,7 +115,7 @@ def make_random_char():
 
     for skill in char.skills:
         # set skill base ratings
-        rating = random.randint(1, 20) // 3
+        rating = int(math.ceil(random.randint(1, 20) / 2))
         if rating < 4:
             rating = 4
         for spec in skill:
@@ -165,8 +165,10 @@ def make_random_char():
     except StopIteration:
         pass
 
-
     # vital speciality!
     char.skills.violence['energy weapons'] += 4
+
+    char.power = random.choice(powers[style])
+    char.registered = (random.randint(1, 20) == 1) and char.power != 'Machine Empathy'
 
     return char
