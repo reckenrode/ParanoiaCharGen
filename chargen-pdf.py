@@ -39,5 +39,6 @@ print
 
 output = Canvas(sys.stdout)
 output.setTitle(char.name)
+output.setAuthor('chargen-pdf.py $LastChangedRevision$')
 Frame(1/2 * inch, 1/2 * inch, 7.5 * inch, 10.5 * inch).addFromList(sheet, output)
 output.save()
