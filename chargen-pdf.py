@@ -38,6 +38,6 @@ print 'Content-Type: application/pdf'
 print
 
 output = Canvas(sys.stdout)
-frame = Frame(1/2 * inch, 1/2 * inch, 7.5 * inch, 10.5 * inch)
-frame.addFromList(sheet, output)
+output.setTitle(char.name)
+Frame(1/2 * inch, 1/2 * inch, 7.5 * inch, 10.5 * inch).addFromList(sheet, output)
 output.save()
