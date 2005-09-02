@@ -86,7 +86,7 @@ def pick_svc_group():
         cover = pick_svc_group()
         while cover.group == None:
             cover = pick_svc_group()
-        return ServiceGroup(group = group, firm = firm, cover = cover.group, coverfirm = cover.firm,
+        return ServiceGroup(group = group, firm = get_svc_firm(group), cover = cover.group, coverfirm = cover.firm,
             spyfor = ServiceGroup(group = group, firm = get_svc_firm(group)),
             spyon = ServiceGroup(group = 'everyone'))
     elif group == 'Industrial spy or saboteur':

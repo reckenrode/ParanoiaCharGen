@@ -17,7 +17,9 @@ def escape(str):
 	return str.replace('&', '&amp;')
 
 def build_table(char, sklist):
-	return Table([[Table(util.build_skill_table(char.skills[skill])) for skill in sklist]])
+	return Table([
+		[h.title() for h in sklist],
+	  	[Table(util.build_skill_table(char.skills[skill])) for skill in sklist]])
 
 char = paranoia.make_random_char()
 sheet = [
