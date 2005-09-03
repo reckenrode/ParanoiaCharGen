@@ -93,7 +93,7 @@ def pick_svc_group():
         spyfor = pick_svc_group()
         spyon = pick_svc_group()
         spyon.firm = None
-        return ServiceGroup(spyfor = spyfor, spyon = spyon)
+        return ServiceGroup(group = spyfor.group, spyfor = spyfor, spyon = spyon)
     else:
         return ServiceGroup(group = group, firm = get_svc_firm(group))
 

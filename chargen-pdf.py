@@ -12,6 +12,11 @@ from reportlab.platypus import Frame, PageBreak, Paragraph, Table
 
 styles = getSampleStyleSheet()
 normal = styles['Normal']
+margins = (1/2 * inch, 1/2 * inch, 7.5 * inch, 10.5 * inch)
+
+pagesize = {
+	'letter': (8.5 * inch, 11 * inch)
+}
 
 def escape(str):
 	return str.replace('&', '&amp;')
@@ -41,11 +46,11 @@ print 'Content-Type: application/pdf'
 print 'Content-Disposition: attachment; filename="%s.pdf"' % char.name
 print
 
-output = Canvas(sys.stdout)
+output = Canvas(sys.stdout, pagesize = pagesize['letter'])
 output.setTitle(char.name)
 output.setAuthor('chargen-pdf rev. %s' % re.match('[^\d]*(\d*).*', '$LastChangedRevision$').groups()[0])
 output.setSubject('Troubleshooter')
-Frame(1/2 * inch, 1/2 * inch, 7.5 * inch, 10.5 * inch).addFromList(publicsheet, output)
+Frame(*margins).addFromList(publicsheet, output)
 output.showPage()
-Frame(1/2 * inch, 1/2 * inch, 7.5 * inch, 10.5 * inch).addFromList(privatesheet, output)
+Frame(*margins).addFromList(privatesheet, output)
 output.save()
