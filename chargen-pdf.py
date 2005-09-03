@@ -78,9 +78,6 @@ try:
 	output.showPage()
 	Frame(*margins).addFromList(privatesheet, output)
 	output.save()
-	print char.group.cover
-	print char.group.spyon
-	print get_spy_info(char.society)
 except:
 	print 'Content-Type: text/html'
 	print

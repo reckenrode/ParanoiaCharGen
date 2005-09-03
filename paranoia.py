@@ -34,7 +34,7 @@ class ServiceGroup(object):
 
 class Skill(object):
     """Represents a character's skill and any of its associated specs."""
-    __slots__ = ['__specs', 'name', 'value']
+    __slots__ = ['_Skill__specs', 'name', 'value']
     def __init__(self, name, defvalue, specs):
         self.name = name
         self.value = defvalue
@@ -57,7 +57,7 @@ class Skill(object):
 
 class SkillCollection(object):
     """Represents a Character's set of skills"""
-    __slots__ = ['__skills', 'uncommon', 'unlikely', 'unhealthy']
+    __slots__ = ['_SkillCollection__skills', 'uncommon', 'unlikely', 'unhealthy']
 
     def __init__(self):
         self.__skills = dict([(sk, Skill(sk, 0, [s for s in specs[sk]]))
