@@ -60,9 +60,9 @@ try:
 	]
 	
 	if char.group.cover != None:
-		privatesheet.append(Paragraph('You are a spy for Internal Security [%s].' % escape(char.group.firm), normal, '*'))
+		privatesheet.append(Paragraph('You are a spy for Internal Security [%s].' % escape(`char.group.firm`), normal, '*'))
 	elif char.group.spyon != None:
-		privatesheet.append(Paragraph('You are an industrial spy or saboteur, and your target is %s.' % escape(char.group.spyon), normal, '*'))
+		privatesheet.append(Paragraph('You are an industrial spy or saboteur, and your target is %s.' % escape(`char.group.spyon`), normal, '*'))
 	
 	privatesheet += get_spy_info(char.society)
 	
