@@ -4,7 +4,7 @@ specs = {
     'Management': ['Bootlicking', 'Chutzpah', 'Hygiene', 'Con Games',
                    'Interrogation', 'Intimidation', 'Moxie', 'Oratory'],
     'Stealth': ['Concealment', 'Disguise', 'High Alert',
-                'Security Systems', 'shadowing', 'Slight of Hand',
+                'Security Systems', 'Shadowing', 'Slight of Hand',
                 'Sneaking', 'Surveilance'],
     'Violence': ['Agility', 'Energy Weapons', 'Demolition',
                  'Field Weapons', 'Fine Manipulation', 'Hand Weapons',
@@ -46,7 +46,7 @@ groups = {
                   'Crowd Control', 'Sensitivity Trainers', 'Threat Assessors',
                   'Tool & Die Works', 'Vulture Squadron Recruiters'],
         'specs': ['Security Systems', 'Electronic Engineering', 'Bot Programming',
-                   'Data Analysis', 'financial systems', 'Data Search', 'Vehicle Programming'],
+                   'Data Analysis', 'Financial Systems', 'Data Search', 'Vehicle Programming'],
         'societies': [(4, 'Computer Phreaks'), (4, 'Corpore Metal'), (2, 'FCCC-P'),
                       (2, 'Sierra Club'), (1, 'Anti-Mutant'), (1, 'Communists'), (1, 'Pro Tech'),
                       (1, 'Psion'), (1, 'PURGE'), (1, 'Illuminati'), (1, 'Spy')]
@@ -57,8 +57,8 @@ groups = {
                   'News Services', 'Public Hating Coordination',
                   'Psyche Ward Administration', 'Sector Expansion Surveyors',
                   'Semantics Control', 'Singalong Agents', 'Subliminals Police'],
-        'specs': ['bootlicking', 'Chutzpah', 'Con Games', 'Moxie', 'Bot Ops & Maintenance',
-                  'Pharmatherapy', 'medical'],
+        'specs': ['Bootlicking', 'Chutzpah', 'Con Games', 'Moxie', 'Bot Ops & Maintenance',
+                  'Pharmatherapy', 'Medical'],
         'societies': [(2, 'Anti-Mutant'), (2, 'FCCC-P'), (3, 'Humanists'),
                       (4, 'Romantics'), (2, 'Sierra Club'), (1, 'Communists'), (1, 'Mystics'),
                       (1, 'Psion'), (1, 'PURGE'), (1, 'Illuminati'), (1, 'Spy')]
@@ -165,9 +165,9 @@ societyskills = [#              Uncommon                                     Unl
     ['Free Enterprise',        'Haggling',                                  'Advertising & Marketing',                     ('Bribery', 'Forgery')],
     ['Humanists',              'Marital Arts',                             ('hobbies', 'languages'),                        'Old Reckoning Cultures'],
     ['Mystics',          ('M', 'Drug Procurement'),                        ('Meditation', 'Partying'),                      'Old Reckoning Drugs'],
-    ['Pro Tech',               'Experimental Equipment Repair/Maintenance', 'Video Games',                                  'WMD'],
+    ['Pro Tech',               'Experimental Equipment Repair',             'Video Games',                                  'WMD'],
     ['Psion',                  'Power Studies',                             'Comic Book Trivia',                            'Twitchtalk'],
     ['PURGE',            ('M', 'Demolition'),                               'Gloating',                                    ('Bioweapons', 'Twitchtalk')],
     ['Romantics',              'Archival Studies',                         ('Cooking', 'Knitting', 'Music'),          ('M', 'Old Reckoning Cultures')],
-    ['Sierra Club',            ('Survial', 'Wild Lore', 'Traval'),         ('Birdwatching', 'Botany', 'Spoor Recognition'), 'Bioweapons']
+    ['Sierra Club',            ('Survial', 'Wild Lore', 'Travel'),         ('Birdwatching', 'Botany', 'Spoor Recognition'), 'Bioweapons']
 ]

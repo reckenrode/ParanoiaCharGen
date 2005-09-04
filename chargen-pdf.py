@@ -5,13 +5,15 @@ from __future__ import division
 import cgi_buffer, paranoia, util, re, sys
 sys.path.append('/home/demiurge/.site-packages/lib/python2.2/site-packages/')
 
+from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.pdfgen.canvas import Canvas
-from reportlab.platypus import Frame, PageBreak, Paragraph, Table
+from reportlab.platypus import Frame, PageBreak, Paragraph, Table, TableStyle
 
 styles = getSampleStyleSheet()
 normal = styles['Normal']
+title = styles['title']
 margins = (0.5 * inch, 0.5 * inch, 7 * inch, 10 * inch)
 
 pagesize = {
@@ -41,20 +43,33 @@ def get_spy_info(society):
 try:
 	char = paranoia.make_random_char('zap')
 
+	actionSkillTable = build_table(char, paranoia.action_skills)
+	knowledgeSkillTable = build_table(char, paranoia.knowledge_skills)
+
+	skillTableStyle = TableStyle([('BACKGROUND',(0,0),(-1, 0),colors.black), 
+								  ('TEXTCOLOR',(0,0),(-1, 0),colors.white),
+								  ('LINEBEFORE', (1, 1), (1, -1), 1, colors.black),
+								  ('LINEBEFORE', (2, 1), (2, -1), 1, colors.black),
+			  					  ('LINEBELOW', (0, -1), (-1, -1), 1, colors.black),
+								  ('VALIGN', (1, 0), (-1, -1), 'TOP')])
+
+	actionSkillTable.setStyle(skillTableStyle)
+	knowledgeSkillTable.setStyle(skillTableStyle)
+
 	publicsheet = [
-		Paragraph('Name: %s' % char.name, normal),
-		Paragraph('Gender: %s' % char.gender, normal),
-		Paragraph(escape(util.format_service_group(char.group)), normal),
-		Paragraph('Action Skills', normal),
-		build_table(char, paranoia.action_skills),
-		Paragraph('Knowledge Skills', normal),
-		build_table(char, paranoia.knowledge_skills)
+		Paragraph('<b>Name:</b> %s' % char.name, normal),
+		Paragraph('<b>Gender:</b> %s' % char.gender, normal),
+		Paragraph('<b>Service group:</b> ' + escape(util.format_service_group(char.group)), normal),
+		Paragraph('Action Skills', title),
+		actionSkillTable,
+		Paragraph('Knowledge Skills', title),
+		knowledgeSkillTable
 	]
 	privatesheet = [
-		Paragraph(util.format_power(char), normal),
-		Paragraph(util.format_society(char.society), normal),
+		Paragraph('<b>Mutant power:</b> ' + util.format_power(char), normal),
+		Paragraph('<b>Secret society:</b> ' + util.format_society(char.society), normal),
 		build_table(char, ['Uncommon', 'Unlikely', 'Unhealthy']),
-		Paragraph('Notes', normal)
+		Paragraph('<b>Notes</b>', normal)
 	]
 	
 	if char.group.cover != None:

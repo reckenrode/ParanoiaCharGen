@@ -3,21 +3,21 @@ import random, operator, weakref
 
 def format_service_group(group):
 	"""pretty prints the group"""
-	rstr = 'Service group: %s [%s]'
+	rstr = '%s [%s]'
 	if group.cover != None: # Spy for IntSec
 		return rstr % (group.cover, group.cover.firm)
 	else:
 		return rstr % (group, group.firm)
 
 def format_society(society):
-	rstr = 'Secret society: %s'
+	rstr = '%s'
 	if society.cover != None:
 		return rstr % society.cover
 	else:
 		return rstr % society.name
 
 def format_power(char):
-	rstr = 'Mutant power: %s'
+	rstr = '%s'
 	if char.registered:
 		rstr += ' [registered]'
 	return rstr % char.power
