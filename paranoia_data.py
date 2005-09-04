@@ -33,7 +33,7 @@ groups = {
                   'Bodygaurd Communications Liaisons', 'Blast Shield Maintenance',
                   'Crowd Control', 'Sensitivity Trainers', 'Threat Assessors',
                   'Tool & Die Works', 'Vulture Squadron Recruiters'],
-        'specs': ['Demolition', 'Energy Weapons', 'Hand Weapons', 'projectile weapons',
+        'specs': ['Demolition', 'Energy Weapons', 'Hand Weapons', 'Projectile Weapons',
                    'Thrown Weapons', 'Unarmed Combat', 'Vehicle Ops & Maintenance'],
         'societies': [(3, 'Anti-Mutant'), (3, 'Death Leopard'), (3, 'Frankenstein Destroyers'),
                       (3, 'PURGE'), (1, 'Communists'), (1, 'FCCC-P'), (1, 'Free Enterprise'),
