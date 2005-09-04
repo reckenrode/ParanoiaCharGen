@@ -35,7 +35,7 @@ class weightedchoice(object):
 	cache = weakref.WeakKeyDictionary()
 	
 	def __new__(cls, lst):
-		lid = tag(id(list))
+		lid = list
 		try:
 			return random.choice(weightedchoice.cache[lid])
 		except KeyError:
