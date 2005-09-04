@@ -1,30 +1,30 @@
 import operator
 
 specs = {
-    'management': ['bootlicking', 'chutzpah', 'hygiene', 'con games',
-                   'interrogation', 'intimidation', 'moxie', 'oratory'],
-    'stealth': ['concealment', 'disguise', 'high alert',
-                'security systems', 'shadowing', 'slight of hand',
-                'sneaking', 'surveilance'],
-    'violence': ['agility', 'energy weapons', 'demolition',
-                 'field weapons', 'fine manipulation', 'hand weapons',
-                 'projectile weapons', 'thrown weapons',
-                 'unarmed combat', 'vehicular combat'],
-    'hardware': ['bot ops & maintenance', 'chemical engineering',
-                 'electronic engineering', 'habitat engineering',
-                 'mechanical engineering', 'nuclear engineering',
-                 'vehicle ops & maintenance',
-                 'weapons & armor maintenance'],
-    'software': ['bot programming', 'c-bay', 'data analysis',
-                 'data search', 'financial systems', 'hacking',
-                 'operating systems', 'vehicle programming'],
-    'wetware': ['biosciences', 'bioweapons', 'cloning', 'medical',
-                'outdoor life', 'pharmatherapy', 'psychotherapy',
-                'suggestion']
+    'Management': ['Bootlicking', 'Chutzpah', 'Hygiene', 'Con Games',
+                   'Interrogation', 'Intimidation', 'Moxie', 'Oratory'],
+    'Stealth': ['Concealment', 'Disguise', 'High Alert',
+                'Security Systems', 'shadowing', 'Slight of Hand',
+                'Sneaking', 'Surveilance'],
+    'Violence': ['Agility', 'Energy Weapons', 'Demolition',
+                 'Field Weapons', 'Fine Manipulation', 'Hand Weapons',
+                 'Projectile Weapons', 'Thrown Weapons',
+                 'Unarmed Combat', 'Vehicular Combat'],
+    'Hardware': ['Bot Ops & Maintenance', 'Chemical Engineering',
+                 'Electronic Engineering', 'Habitat Engineering',
+                 'Mechanical Engineering', 'Nuclear Engineering',
+                 'Vehicle Ops & Maintenance',
+                 'Weapons & Armor Maintenance'],
+    'Software': ['Bot Programming', 'C-Bay', 'Data Analysis',
+                 'Data Search', 'Financial Systems', 'Hacking',
+                 'Operating Systems', 'Vehicle Programming'],
+    'Wetware': ['Biosciences', 'Bioweapons', 'Cloning', 'Medical',
+                'Outdoor Life', 'Pharmatherapy', 'Psychotherapy',
+                'Suggestion']
 }
 
-action_skills = ['management', 'stealth', 'violence']
-knowledge_skills = ['hardware', 'software', 'wetware']
+action_skills = ['Management', 'Stealth', 'Violence']
+knowledge_skills = ['Hardware', 'Software', 'Wetware']
 
 groups = {
     'Armed Forces': {
@@ -33,8 +33,8 @@ groups = {
                   'Bodygaurd Communications Liaisons', 'Blast Shield Maintenance',
                   'Crowd Control', 'Sensitivity Trainers', 'Threat Assessors',
                   'Tool & Die Works', 'Vulture Squadron Recruiters'],
-        'specs': ['demolition', 'energy weapons', 'hand weapons', 'projectile weapons',
-                   'thrown weapons', 'unarmed combat', 'vehicle ops & maintenance'],
+        'specs': ['Demolition', 'Energy Weapons', 'Hand Weapons', 'projectile weapons',
+                   'Thrown Weapons', 'Unarmed Combat', 'Vehicle Ops & Maintenance'],
         'societies': [(3, 'Anti-Mutant'), (3, 'Death Leopard'), (3, 'Frankenstein Destroyers'),
                       (3, 'PURGE'), (1, 'Communists'), (1, 'FCCC-P'), (1, 'Free Enterprise'),
                       (1, 'Pro Tech'), (1, 'Psion'), (1, 'Illuminati'), (1, 'Spy')]
@@ -45,8 +45,8 @@ groups = {
                   'Bodygaurd Communications Liaisons', 'Blast Shield Maintenance',
                   'Crowd Control', 'Sensitivity Trainers', 'Threat Assessors',
                   'Tool & Die Works', 'Vulture Squadron Recruiters'],
-        'specs': ['security systems', 'electronic engineering', 'bot programming',
-                   'data analysis', 'financial systems', 'data search', 'vehicle programming'],
+        'specs': ['Security Systems', 'Electronic Engineering', 'Bot Programming',
+                   'Data Analysis', 'financial systems', 'Data Search', 'Vehicle Programming'],
         'societies': [(4, 'Computer Phreaks'), (4, 'Corpore Metal'), (2, 'FCCC-P'),
                       (2, 'Sierra Club'), (1, 'Anti-Mutant'), (1, 'Communists'), (1, 'Pro Tech'),
                       (1, 'Psion'), (1, 'PURGE'), (1, 'Illuminati'), (1, 'Spy')]
@@ -57,8 +57,8 @@ groups = {
                   'News Services', 'Public Hating Coordination',
                   'Psyche Ward Administration', 'Sector Expansion Surveyors',
                   'Semantics Control', 'Singalong Agents', 'Subliminals Police'],
-        'specs': ['bootlicking', 'chutzpah', 'con games', 'moxie', 'bot ops & maintenance',
-                  'pharmatherapy', 'medical'],
+        'specs': ['bootlicking', 'Chutzpah', 'Con Games', 'Moxie', 'Bot Ops & Maintenance',
+                  'Pharmatherapy', 'medical'],
         'societies': [(2, 'Anti-Mutant'), (2, 'FCCC-P'), (3, 'Humanists'),
                       (4, 'Romantics'), (2, 'Sierra Club'), (1, 'Communists'), (1, 'Mystics'),
                       (1, 'Psion'), (1, 'PURGE'), (1, 'Illuminati'), (1, 'Spy')]
@@ -69,8 +69,8 @@ groups = {
                   'Re-Education Client Procurement', 'Surveillance Operatives',
                   'Termination Center Janitorial', 'Thought Surveyors',
                   'Threat Assessors', 'Treason Scene Cleanup'],
-        'specs': ['interrogation', 'intimidation', 'security systems',
-                  'surveilance', 'energy weapons', 'hand weapons', 'unarmed combat'],
+        'specs': ['Interrogation', 'Intimidation', 'Security Systems',
+                  'Surveilance', 'Energy Weapons', 'Hand Weapons', 'Unarmed Combat'],
         'societies': [(3, 'Anti-Mutant'), (3, 'Death Leopard'), (3, 'FCCC-P'),
                       (3, 'Frankenstein Destroyers'), (1, 'Communists'), (1, 'Free Enterprise'), (1, 'Pro Tech'),
                       (1, 'Psion'), (1, 'PURGE'), (1, 'Illuminati'), (1, 'Spy')]
@@ -81,8 +81,8 @@ groups = {
                   'Field Logistics Advisors', 'Food Vat Control', 'Inventory System Updaters',
                   'Printing Office Field Checkers', 'Storage Media Integrity Assessors',
                   'Warehouse System Inspectors'],
-        'specs': ['chutzpah', 'con games', 'bot ops & maintenance', 'habitat engineering',
-                  'vehicle ops & maintenance', 'data search', 'biosciences'],
+        'specs': ['Chutzpah', 'Con Games', 'Bot Ops & Maintenance', 'Habitat Engineering',
+                  'Vehicle Ops & Maintenance', 'Data Search', 'Biosciences'],
         'societies': [(5, 'Free Enterprise'), (3, 'Humanists'), (2, 'Mystics'),
                       (2, 'Romantics'), (1, 'Communists'), (1, 'Pro Tech'), (1, 'Psion'),
                       (1, 'Sierra Club'), (1, 'Illuminati'), (1, 'Spy')]
@@ -93,9 +93,9 @@ groups = {
                   'Fuel Cell Replenishment', 'Fuel Rod Disposal Consultants',
                   'Odor Fresheners', 'Power Oscillation Professionals', 'Safe Atoms Initiative',
                   'Wire Supply Checkers'],
-        'specs': ['data analysis', 'data search', 'chemical engineering',
-                  'electronic engineering', 'habitat engineering', 'mechanical engineering',
-                  'nuclear engineering'],
+        'specs': ['Data Analysis', 'Data Search', 'Chemical Engineering',
+                  'Electronic Engineering', 'Habitat Engineering', 'Mechanical Engineering',
+                  'Nuclear Engineering'],
         'societies': [(2, 'Computer Phreaks'), (2, 'Death Leopard'), (2, 'FCCC-P'),
                       (2, 'Frankenstein Destroyers'), (2, 'Free Enterprise'), (2, 'Mystics'), (2, 'Pro Tech'),
                       (2, 'PURGE'), (1, 'Communists'), (1, 'Illuminati'), (1, 'Spy')]
@@ -106,8 +106,8 @@ groups = {
                   'Field Data Collectors', 'Goo Cleanup', 'RoboPsych Auditing',
                   'Scienctist Sanity Checkers', 'Vehicle Therapists',
                   'Weapon Effectiveness Assessors'],
-        'specs': ['chemical engineering', 'mechanical engineering', 'nuclear engineering',
-                  'bot programming', 'vehicle programming', 'bioweapons', 'cloning'],
+        'specs': ['Chemical Engineering', 'Mechanical Engineering', 'Nuclear Engineering',
+                  'Bot Programming', 'Vehicle Programming', 'Bioweapons', 'Cloning'],
         'societies': [(3, 'Computer Phreaks'), (3, 'Corpore Metal'), (3, 'Pro Tech'),
                       (3, 'Psion'), (3, 'PURGE'), (1, 'FCCC-P'), (1, 'Communists'),
                       (1, 'Illuminati'), (1, 'Spy')]
@@ -118,9 +118,9 @@ groups = {
                   'Consolidated Motorized Transport (CMT)', 'Fuel Cell Replenishment',
                   'MemoMax Quality Assurance', 'Medical Services', 'Paint Control',
                   'Slime Identification', 'Tech Support'],
-        'specs': ['chemical engineering', 'electronic engineering', 'habitat engineering',
-                  'vehicle ops & maintenance', 'bot programming', 'vehicle programming',
-                  'pharmatherapy'],
+        'specs': ['Chemical Engineering', 'Electronic Engineering', 'Habitat Engineering',
+                  'Vehicle Ops & Maintenance', 'Bot Programming', 'Vehicle Programming',
+                  'Pharmatherapy'],
         'societies': [(2, 'Computer Phreaks'), (2, 'Corpore Metal'), (2, 'Death Leopard'),
                       (2, 'Frankenstein Destroyers'), (2, 'Mystics'), (2, 'Pro Tech'), (2, 'Psion'),
                       (2, 'Sierra Club'), (1, 'Communists'), (1, 'Illuminati'), (1, 'Spy')]

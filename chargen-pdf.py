@@ -25,7 +25,7 @@ def escape(str):
 
 def build_table(char, sklist):
 	return Table([
-		[h.title() for h in sklist],
+		[h for h in sklist],
 	  	[Table(util.build_skill_table(char.skills[skill])) for skill in sklist]])
 
 def get_spy_info(society):
@@ -53,9 +53,7 @@ try:
 	privatesheet = [
 		Paragraph(util.format_power(char), normal),
 		Paragraph(util.format_society(char.society), normal),
-		Paragraph('Uncommon skill: %s' % escape(char.skills.uncommon), normal),
-		Paragraph('Unlikely skill: %s' % escape(char.skills.unlikely), normal),
-		Paragraph('Unhealthy skill: %s' % escape(char.skills.unhealthy), normal),
+		build_table(char, ['Uncommon', 'Unlikely', 'Unhealthy']),
 		Paragraph('Notes', normal)
 	]
 	

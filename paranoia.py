@@ -57,11 +57,14 @@ class Skill(object):
 
 class SkillCollection(object):
     """Represents a Character's set of skills"""
-    __slots__ = ['_SkillCollection__skills', 'uncommon', 'unlikely', 'unhealthy']
+    __slots__ = ['_SkillCollection__skills']
 
     def __init__(self):
         self.__skills = dict([(sk, Skill(sk, 0, [s for s in specs[sk]]))
                                  for sk in action_skills + knowledge_skills])
+        self.__skills['Uncommon'] = {}
+        self.__skills['Unlikely'] = {}
+        self.__skills['Unhealthy'] = {}
 
     def __getitem__(self, key):
         return self.__skills[key]
@@ -184,7 +187,7 @@ def make_random_char(style):
     tmp_spec_list = reduce(operator.add, specs.itervalues())
 
     random.shuffle(tmp_spec_list)
-    tmp_spec_list.remove('energy weapons')
+    tmp_spec_list.remove('Energy Weapons')
 
     rec_skills = {}
     # boosts
@@ -225,14 +228,20 @@ def make_random_char(style):
         pass
 
     # vital speciality!
-    char.skills['violence']['energy weapons'] += 4
+    char.skills['Violence']['Energy Weapons'] += 4
 
     char.power = random.choice(powers[style])
     char.registered = (random.randint(1, 20) == 1) and char.power != 'Machine Empathy'
     
     char.society = pick_society(char.group)
-    char.skills.uncommon = char.society.skills[0]
-    char.skills.unlikely = char.society.skills[1]
-    char.skills.unhealthy = char.society.skills[2]
+    char.skills['Uncommon'][char.society.skills[0]] = random.randint(1, 20)
+    char.skills['Unlikely'][char.society.skills[1]] = random.randint(1, 20)
+    char.skills['Unhealthy'][char.society.skills[2]] = random.randint(1, 20)
+
+    for (skill, specx) in specs.iteritems():
+        for cls in ['Uncommon', 'Unlikely', 'Unhealthy']:
+            for spec in char.skills[cls]:
+                if spec in specx:
+                    char.skills['Uncommon'][spec] = char.skills[skill][spec]
 
     return char
