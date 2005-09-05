@@ -26,6 +26,11 @@ def build_skill_table(skill):
 	"""makes an nx2 table of the skill's specs where n = len(skill.specs)"""
 	table = [[spec, skill[spec]] for spec in skill]
 	table.sort(lambda x, y: cmp(x[0], y[0]))
+	if 'Energy Weapons' not in skill:
+		table.append(['________________________', '__'])
+		table.append(['________________________', '__'])
+	table.append(['________________________', '__'])
+	table.append(['________________________', '__'])
 	return table
 
 class tag(int): pass
