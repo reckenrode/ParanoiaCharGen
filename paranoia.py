@@ -6,13 +6,14 @@ from paranoia_data import *
 
 
 class SecretSociety(object):
-    __slots__ = ['cover', 'name', 'skills', 'spyon']
+    __slots__ = ['cover', 'name', 'skills', 'spyon', 'degree']
     
     def __init__(self, **kwargs):
         self.name = kwargs.get('name', None)
         self.spyon = kwargs.get('spyon', None)
         self.cover = kwargs.get('cover', None)
         self.skills = kwargs.get('skills', [])
+        self.degree = kwargs.get('degree', None)
         
     def __str__(self):
         return self.name
@@ -147,21 +148,27 @@ def pickskill(n, skilltype):
         return skill
 
 
-def pick_society(group):
+def pick_society(group, style):
     society = util.weightedchoice(groups[group.name]['societies'])
+    if style == 'classic':
+        degree = int(math.ceil(random.randint(1, 20) / 4))
+    elif style == 'zap':
+        degree = random.randint(1, 20)
+    else: # style == lame
+        degree = 1
     if society == 'Illuminati':
-        cover = pick_society(group)
+        cover = pick_society(group, style)
         while cover.name == 'Illuminati': # Fold all Illuminatis into one big Illuminati
-            cover = pick_society(group)
-        return SecretSociety(name = society, cover = cover, skills = getskills(lookup_society(cover)))
+            cover = pick_society(group, style)
+        return SecretSociety(name = society, cover = cover, skills = getskills(lookup_society(cover)), degree = degree)
     elif society == 'Spy':
-        forwhom = pick_society(group)
-        forwhom.spyon = pick_society(group)
+        forwhom = pick_society(group, style)
+        forwhom.spyon = pick_society(group, style)
         while forwhom.spyon.name == forwhom.name:
-            forwhom.spyon = pick_society(group)
+            forwhom.spyon = pick_society(group, style)
         return forwhom
     else:
-        return SecretSociety(name = society, skills = getskills(lookup_society(society)))
+        return SecretSociety(name = society, skills = getskills(lookup_society(society)), degree = degree)
 
 
 def make_random_char(style):
@@ -233,7 +240,7 @@ def make_random_char(style):
     char.power = random.choice(powers[style])
     char.registered = (random.randint(1, 20) == 1) and char.power != 'Machine Empathy'
     
-    char.society = pick_society(char.group)
+    char.society = pick_society(char.group, style)
     char.skills['Uncommon'][char.society.skills[0]] = random.randint(1, 20)
     char.skills['Unlikely'][char.society.skills[1]] = random.randint(1, 20)
     char.skills['Unhealthy'][char.society.skills[2]] = random.randint(1, 20)

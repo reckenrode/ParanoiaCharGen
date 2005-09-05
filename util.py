@@ -6,15 +6,19 @@ def format_service_group(group):
 	rstr = '%s [%s]'
 	if group.cover != None: # Spy for IntSec
 		return rstr % (group.cover, group.cover.firm)
+	elif group.spyon != None:
+		return rstr % (group.spyon, group.spyon.firm)
 	else:
 		return rstr % (group, group.firm)
 
 def format_society(society):
-	rstr = '%s'
+	rstr = '%s (degree: %s)'
 	if society.cover != None:
-		return rstr % society.cover
+		return rstr % (society.cover, society.cover.degree)
+	elif society.spyon != None:
+		return rstr % (society.spyon.name, society.spyon.degree)
 	else:
-		return rstr % society.name
+		return rstr % (society.name, society.degree)
 
 def format_power(char):
 	rstr = '%s'
