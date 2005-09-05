@@ -57,6 +57,8 @@ else:
 #	name = query['name']
 	
 char = paranoia.make_random_char(style)
+if query.has_key('customid'):
+	char.name = "%s-%s-%s-%s" % (query.getvalue('customname'), query.getvalue('clearance'), query.getvalue('sector'), query.getvalue('cloneno'))
 
 mainTitle = ParagraphStyle(name='MainTitle',
                               parent=title,

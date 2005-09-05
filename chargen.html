@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	<!-- This should work in even the shittiest of UAs -->
+	<!-- This is also kind of ugly, but it works -->
+		<title>Paranoia Character Generator</title>
+		<script type="text/javascript">
+		function toggleidstuff() {
+			var form = document.getElementById('theform');
+			var checkbox = document.getElementById('customid');
+			for (i = 0; i < form.elements.length; ++i) {
+				var item = form.elements.item(i);
+				if (item.id != 'customid' && item.id != 'style' && item.value != 'Decant') {
+					item.disabled = !checkbox.checked;
+				}
+			}
+		}
+		</script>
+		<style type="text/css">
+			form, caption, body, td, tr, table {
+				padding: 0;
+				margin: 0;
+			}
+			body {
+				padding: 12px;
+			}
+			
+			caption {
+				padding-bottom: 6px;
+				text-align: left;
+			}
+			select {
+				width: 100%;
+			}
+			table {
+				padding-top: 6px;
+			}
+			td {
+				padding-right: 6px;
+				padding-bottom: 6px;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="http://kenada.polyatomic.org/cgi-bin/chargen-pdf.py" id="theform" name="theform" method="get">
+		<label>Use a custom name:</label><input id="customid" name="customid" onclick="toggleidstuff()" style="padding-left: 6px;" type="checkbox">
+		<table>
+			<tr>
+				<td style="padding-left: 12px;"><label>Name:</label></td><td><input name="customname" type="text"></td>
+			</tr>
+			<tr>
+				<td style="padding-left: 12px;"><label>Clearance:</label></td><td><select name="clearance">
+<!--				<option value="">Infrared</option> -->
+				<option value="R">Red</option>
+				<option value="O">Orange</option>
+				<option value="Y">Yellow</option>
+				<option value="G">Green</option>
+				<option value="B">Blue</option>
+				<option value="I">Indigo</option>
+				<option value="V">Violet</option>
+<!--				<option value="">Ultraviolet</option> -->
+			</select></td>
+			</tr>
+			<tr>
+				<td style="padding-left: 12px;"><label>Sector:</label></td><td><input maxlength="3" name="sector" type="text"></td>
+			</tr>
+			
+			<tr><td style="padding-left: 12px;"><label>Clone #:</label></td><td><input name="cloneno" type="text" value="1"></td></tr>
+			<tr><td style="padding-left: 0;">Play style:</td><td><select id="style" name="style">
+				<option>classic</option>
+				<option>straight</option>
+				<option selected>zap</option>
+			</select></td></tr>
+			<tr><td></td><td align="right"><input type="submit" value="Decant"></td></tr>
+			</table>
+		</form>
+	<script type="text/javascript">
+		toggleidstuff();
+	</script>
+	</body>
+</html>
