@@ -242,6 +242,6 @@ def make_random_char(style):
         for cls in ['Uncommon', 'Unlikely', 'Unhealthy']:
             for spec in char.skills[cls]:
                 if spec in specx:
-                    char.skills['Uncommon'][spec] = char.skills[skill][spec]
+                    char.skills[cls][spec] = char.skills[skill][spec]
 
     return char
