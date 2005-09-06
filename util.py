@@ -41,10 +41,10 @@ class tag(int): pass
 
 class weightedchoice(object):
 	__slots__ = ['cache']
-	cache = weakref.WeakKeyDictionary()
+	cache = {}
 	
 	def __new__(cls, lst):
-		lid = list
+		lid = id(lst)
 		try:
 			return random.choice(weightedchoice.cache[lid])
 		except KeyError:

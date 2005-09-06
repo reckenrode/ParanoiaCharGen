@@ -177,7 +177,7 @@ def make_random_char(style):
     char = Character()
 
     char.name = namegen.random_name()
-    char.gender = random.choice(['Male', 'Female'])
+    char.gender = util.weightedchoice([(20, 'Male'), (20, 'Female'), (5, 'Other')])
 
     char.group = pick_svc_group()
     grpspec = random.choice(groups[char.group.name]['specs'])
