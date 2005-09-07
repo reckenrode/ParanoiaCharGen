@@ -50,6 +50,8 @@ def get_spy_info(society):
 query = cgi.FieldStorage()
 if query.has_key('style'):
 	style = query['style'].value
+	if style not in ['zap', 'classic', 'straight']:
+		style = 'zap'
 else:
 	style = 'zap'
 	

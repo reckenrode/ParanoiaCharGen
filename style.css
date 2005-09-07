@@ -1,0 +1,59 @@
+
+
+.airlock {
+	margin-left: 20px;
+	padding-left: 10px;
+	border-left: thin solid black;
+}
+
+h1 {
+
+
+
+} 
+
+.notice {
+	margin: 10px;
+	font-size: larger;
+}
+
+.notice em {
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.form caption, td, tr, table {
+	padding: 0;
+	margin: 0;
+}
+
+.bodytext {
+	margin: 4px;
+}
+
+body {
+	padding: 12px;
+	font-family: sans-serif;
+}
+
+.form {
+	padding-top: 10px;
+}
+
+.form caption {
+	padding-bottom: 6px;
+	text-align: left;
+}
+
+.form select {
+	width: 100%;
+}
+
+.form table {
+	padding-top: 4px;
+}
+
+.form td {
+	padding-right: 6px;
+	padding-bottom: 6px;
+}
