@@ -67,12 +67,16 @@ class SkillCollection(object):
         self.__skills['Unlikely'] = Skill(name = 'Unlikely')
         self.__skills['Unhealthy'] = Skill(name = 'Unhealthy')
 
+
     def __getitem__(self, key):
         return self.__skills[key]
 
     def __iter__(self):
         """Returns an iterator over the skills in the collection"""
         return self.__skills.itervalues()
+        
+    def __len__(self):
+        return len(self.__skills)
 
 
 class Character(object):
@@ -171,7 +175,7 @@ def pick_society(group, style):
         return SecretSociety(name = society, skills = getskills(lookup_society(society)), degree = degree)
 
 
-def make_random_char(style):
+def make_random_char(style, skillpick="die"):
     """Returns a new troubleshooter to serve Friend Computer. Termination of
     commie mutant traitors that may be generated is left up to the user."""
     char = Character()
@@ -182,13 +186,37 @@ def make_random_char(style):
     char.group = pick_svc_group()
     grpspec = random.choice(groups[char.group.name]['specs'])
 
-    for skill in char.skills:
-        # set skill base ratings
-        rating = int(math.ceil(random.randint(1, 20) / 2))
-        if rating < 4:
-            rating = 4
-        for spec in skill:
-            skill[spec] = rating
+    if skillpick not in ["die", "point", "flat"]:
+        skillpick == "die"
+
+    # set skill base ratings
+    if skillpick == "die":
+        for skill in char.skills:
+            # set skill base ratings
+            rating = int(math.ceil(random.randint(1, 20) / 2))
+            if rating < 4:
+                rating = 4
+            for spec in skill:
+                skill[spec] = rating
+    elif skillpick == "point":
+        skill_start_ratings = {}
+        for skill in char.skills:
+            if skill.name not in ['Uncommon', 'Unlikely', 'Unhealthy']:
+                skill_start_ratings[skill] = 4
+        rating_sum = len(skill_start_ratings.keys()) * 4
+        while rating_sum < 40:
+            (s, v) = random.choice(skill_start_ratings.items())
+            skill_start_ratings[s] = v + 1
+            rating_sum = rating_sum + 1
+        for skill in char.skills:
+            if skill in skill_start_ratings.keys():
+                for spec in skill:
+                    skill[spec] = skill_start_ratings[skill]
+    elif skillpick == "flat":
+        for skill in char.skills:
+            for spec in skill:
+                skill[spec] = 7
+        
 
     # put all of the spec lists into one big list
     tmp_spec_list = reduce(operator.add, specs.itervalues())

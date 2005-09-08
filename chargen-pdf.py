@@ -57,8 +57,16 @@ else:
 	
 #if query.has_key('name'):
 #	name = query['name']
-	
-char = paranoia.make_random_char(style)
+
+if query.has_key('method'):
+	method = query['method'].value
+	if method not in ['die', 'point', 'flat']:
+		method = 'die'
+else:
+	method = 'die'
+
+char = paranoia.make_random_char(style, method)
+
 if query.has_key('customid'):
 	char.name = "%s-%s-%s-%s" % (query.getvalue('customname'), query.getvalue('clearance'), query.getvalue('sector'), query.getvalue('cloneno'))
 	char.gender = query.getvalue('gender')
