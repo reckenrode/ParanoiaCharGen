@@ -36,10 +36,10 @@ class ServiceGroup(object):
 class Skill(object):
     """Represents a character's skill and any of its associated specs."""
     __slots__ = ['_Skill__specs', 'name', 'value']
-    def __init__(self, name, defvalue, specs):
-        self.name = name
-        self.value = defvalue
-        self.__specs = dict([(s, defvalue) for s in specs])
+    def __init__(self, **kwargs):
+        self.name = kwargs.get('name', '')
+        self.value = kwargs.get('defvalue', 0)
+        self.__specs = dict([(s, self.value) for s in kwargs.get('specs', [])])
 
     def __iter__(self):
         """Returns an iterator to the skill's specs"""
@@ -61,11 +61,11 @@ class SkillCollection(object):
     __slots__ = ['_SkillCollection__skills']
 
     def __init__(self):
-        self.__skills = dict([(sk, Skill(sk, 0, [s for s in specs[sk]]))
+        self.__skills = dict([(sk, Skill(name = sk, defvalue = 0, specs = [s for s in specs[sk]]))
                                  for sk in action_skills + knowledge_skills])
-        self.__skills['Uncommon'] = {}
-        self.__skills['Unlikely'] = {}
-        self.__skills['Unhealthy'] = {}
+        self.__skills['Uncommon'] = Skill(name = 'Uncommon')
+        self.__skills['Unlikely'] = Skill(name = 'Unlikely')
+        self.__skills['Unhealthy'] = Skill(name = 'Unhealthy')
 
     def __getitem__(self, key):
         return self.__skills[key]
