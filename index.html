@@ -8,7 +8,9 @@
 			var checkbox = document.getElementById('customid');
 			for (i = 0; i < form.elements.length; ++i) {
 				var item = form.elements.item(i);
-				if (item.id != 'customid' && item.id != 'style' && item.value != 'Decant' && item.id != 'method') {
+				if (item.id != 'customid' && item.id != 'style' 
+						&& item.value != 'Decant' && item.id != 'method'
+						&& item.id != 'mutant_experience') {
 					item.disabled = !checkbox.checked;
 				}
 			}
@@ -49,7 +51,7 @@
 			<tr>
 				<td style="padding-left: 12px;"><label>Sector:</label></td><td><input maxlength="3" name="sector" type="text"></td>
 			</tr>
-			
+	
 			<tr><td style="padding-left: 12px;"><label>Clone #:</label></td><td><input name="cloneno" type="text" value="1"></td></tr>
 			<tr>
 				<td style="padding-left: 12px;"><label>Gender:</label></td><td><select name="gender">
@@ -64,6 +66,10 @@
 				<option>straight</option>
 				<option selected>zap</option>
 			</select></td></tr>
+			<tr>
+				<td colspan="2"><input id="mutant_experience" name="mutant_experience" style="padding-left: 6px;" type="checkbox">
+				<label>Use mutations from <i>The Mutant Experience</i></label></td>
+			</tr>
 			<tr><td style="padding-left: 0;">Stat generation method:</td><td><select id="method" name="method">
 				<option value="die" selected>Die roll</option>
 				<option value="point">Buy to 40</option>

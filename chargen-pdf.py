@@ -65,7 +65,12 @@ if query.has_key('method'):
 else:
 	method = 'die'
 
-char = paranoia.make_random_char(style, method)
+if query.has_key('mutant_experience'):
+	mutant_experience = True
+else:
+	mutant_experience = False
+
+char = paranoia.make_random_char(style, method, True)
 
 if query.has_key('customid'):
 	char.name = "%s-%s-%s-%s" % (query.getvalue('customname'), query.getvalue('clearance'), query.getvalue('sector'), query.getvalue('cloneno'))

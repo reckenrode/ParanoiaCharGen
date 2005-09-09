@@ -175,7 +175,7 @@ def pick_society(group, style):
         return SecretSociety(name = society, skills = getskills(lookup_society(society)), degree = degree)
 
 
-def make_random_char(style, skillpick="die"):
+def make_random_char(style, skillpick="die", mutant_experience=False):
     """Returns a new troubleshooter to serve Friend Computer. Termination of
     commie mutant traitors that may be generated is left up to the user."""
     char = Character()
@@ -206,8 +206,9 @@ def make_random_char(style, skillpick="die"):
         rating_sum = len(skill_start_ratings.keys()) * 4
         while rating_sum < 40:
             (s, v) = random.choice(skill_start_ratings.items())
-            skill_start_ratings[s] = v + 1
-            rating_sum = rating_sum + 1
+            if v < 10:
+                skill_start_ratings[s] = v + 1
+                rating_sum = rating_sum + 1
         for skill in char.skills:
             if skill in skill_start_ratings.keys():
                 for spec in skill:
@@ -265,7 +266,12 @@ def make_random_char(style, skillpick="die"):
     # vital speciality!
     char.skills['Violence']['Energy Weapons'] += 4
 
-    char.power = random.choice(powers[style])
+    if mutant_experience == True:
+        char.power = random.choice(mutant_experience_powers[style])
+    else:
+        char.power = random.choice(powers[style])
+    
+    
     char.registered = (random.randint(1, 20) == 1) and char.power != 'Machine Empathy'
     
     char.society = pick_society(char.group, style)

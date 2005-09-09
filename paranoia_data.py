@@ -153,6 +153,52 @@ powers = {
             'Teleportation', 'Transmutaiton', 'X-Ray Vision']
 }
 
+mutant_experience_powers = {
+    'classic': ["Charm", "Corrosion", "Detect Mutant Power",
+                "Electroshock", "Empathy", "Energy Field",
+                "Hypersenses", "Levitation", "Machine Empathy",
+                "Matter Eater", "Mental Blast", "Polymorphism",
+                "Puppeteer", "Pyrokinesis", "Regeneration",
+                "Slippery Skin", "Telekinesis", "Teleportation",
+                "Uncanny Luck", "X-Ray Vision", "Call Bots",
+                "Chromativariation", "Creeping Madness", "Environmental Control",
+                "Gravity Manipulation", "Haze", "Hyperreflexes",
+                "Jump!", "Light Control", "Magnetize",
+                "Pouches", "Push Mutant Powers", "Radioactivity",
+                "Scream", "Sculpt", "Second Skin", "Speed", "Spikes",
+                "Stench", "Stretchy"],
+    'straight': ["Adhesive Skin", "Adrenalin Control", "Bureaucratic Intuition",
+                "Charm", "Death Simulation", "Deep Thought",
+                "Electroshock", "Empathy", "Energy Field",
+                "Hypersenses", "Machine Empathy", "Matter Eater",
+                "Mechanical Intuition", "Mental Blast", "Pyrokinesis",
+                "Regeneration", "Rubbery Bones", "Toxic Metabolism",
+                "Uncanny Luck", "Ventriloquist", "Adaptive Metabolism",
+                "Call Bots", "Clean Slate", "Creeping Madness",
+                "Environmental Control", "Find Location", "Forgettable",
+                "Haze", "Hyperreflexes", "Jump!",
+                "Light Control", "Mind Sense", "Pouches",
+                "Psychometry", "Push Mutant Powers", "Radioactivity",
+                "Second Skin", "Speed", "Stench",
+                "Stretchy"],
+    'zap':     ["Absorption", "Chameleon", "Charm",
+                "Desolidity", "Electroshock", "Energy Field",
+                "Growth", "Levitation", "Machine Empathy",
+                "Matter Eater", "Mental Blast", "Polymorphism",
+                "Puppeteer", "Pyrokinesis", "Regeneration",
+                "Shrinking", "Telekinesis", "Teleportation",
+                "Transmutation", "X-Ray Vision", "Acidic Spit",
+                "Bouncy", "Chromativariation", "Creeping Madness",
+                "Cryokinesis", "Enervating Darkness", "Gravity Manipulation",
+                "Haze", "Hyperreflexes", "Jump!",
+                "Magnetize", "Radioactivity", "Scream",
+                "Sculpt", "Second Skin", "Speed",
+                "Spikes", "Stasis", "Stench",
+                "Stretchy"] 
+ }
+    
+
+
 # A skill of 'M' indicates the next is mandatory for that society                
 societyskills = [#              Uncommon                                     Unlikely                                        Unhealthy
     ['Anti-Mutant',            'Power Studies',                             'Comic Book Trivia',                            'Twitchtalk'],
