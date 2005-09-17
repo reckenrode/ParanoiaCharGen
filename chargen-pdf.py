@@ -70,7 +70,12 @@ if query.has_key('mutant_experience'):
 else:
 	mutant_experience = False
 
-char = paranoia.make_random_char(style, method, True)
+if query.has_key('servicegroup'):
+	servicegroup = query['servicegroup'].value
+else:
+	servicegroup = "Random"
+
+char = paranoia.make_random_char(style, method, True, servicegroup)
 
 if query.has_key('customid'):
 	char.name = "%s-%s-%s-%s" % (query.getvalue('customname'), query.getvalue('clearance'), query.getvalue('sector'), query.getvalue('cloneno'))

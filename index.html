@@ -10,7 +10,7 @@
 				var item = form.elements.item(i);
 				if (item.id != 'customid' && item.id != 'style' 
 						&& item.value != 'Decant' && item.id != 'method'
-						&& item.id != 'mutant_experience') {
+						&& item.id != 'mutant_experience' && item.id != 'servicegroup') {
 					item.disabled = !checkbox.checked;
 				}
 			}
@@ -70,6 +70,17 @@
 				<td colspan="2"><input id="mutant_experience" name="mutant_experience" style="padding-left: 6px;" type="checkbox">
 				<label>Use mutations from <i>The Mutant Experience</i></label></td>
 			</tr>
+			<tr><td style="padding-left: 0;">Assigned service group:</td><td><select id="servicegroup" name="servicegroup">
+				<option selected>Random</option>
+				<option>Armed Forces</option>
+				<option>Central Processing Unit</option>
+				<option>HPD & Mind Control</option>
+				<option>Internal Security</option>
+				<option value="Production, Logistics & Commissary">PLC</option>
+				<option>Power Services</option>
+				<option>Research & Design</option>
+				<option>Technical Services</option>
+			</select></td></tr>
 			<tr><td style="padding-left: 0;">Stat generation method:</td><td><select id="method" name="method">
 				<option value="die" selected>Die roll</option>
 				<option value="point">Buy to 40</option>
