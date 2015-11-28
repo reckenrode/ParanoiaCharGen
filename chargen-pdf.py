@@ -6,6 +6,8 @@ from __future__ import division
 import cgi, cgitb, cgi_buffer, paranoia, util, re, sys
 sys.path.append('/home/demiurge/.site-packages/lib/python2.2/site-packages/')
 
+import EquipmentDatabase
+
 cgitb.enable()
 
 from reportlab.lib import colors
@@ -19,22 +21,22 @@ styles = getSampleStyleSheet()
 normal = ParagraphStyle(name='normal', parent=styles['Normal'], fontName="Helvetica", bulletFontName='Symbol')
 title = ParagraphStyle(name='title', parent=styles['title'], fontName="Helvetica", bulletFontName='Symbol', spaceBefore=6)
 
-margins = (0.5 * inch, 0.5 * inch, 7 * inch, 9.5 * inch)
+margins = (0.5 * inch, 0.5 * inch, 7.5 * inch, 9.5 * inch)
 
 pagesize = {
 	'letter': (8.5 * inch, 11 * inch)
 }
 
-version = 'chargen-pdf rev. %s' % re.match('[^\d]*(\d*).*', '$LastChangedRevision$').groups()[0]
+version = 'chargen-pdf rev. %s' % re.match('[^\d]*(\d*).*', '$LastChangedRevision: 48 $').groups()[0]
 
 def escape(str):
 	return str.replace('&', '&amp;')
 
 def build_table(char, sklist, s=TableStyle()):
-	thirdsize = (7*inch - 0.5*inch)/3.0
+	thirdsize = (8*inch - 2*0.5*inch)/3.0
 	return Table([
 		[h for h in sklist],
-	  	[Table(util.build_skill_table(char.skills[skill]), style=s, colWidths=(thirdsize-inch/2, inch/2)) for skill in sklist]])
+	  	[Table(util.build_skill_table(char.skills[skill]), style=s, colWidths=(thirdsize-inch/2, inch/2)) for skill in sklist]] )
 
 def get_spy_info(society):
 	results = []
@@ -75,12 +77,21 @@ if query.has_key('servicegroup'):
 else:
 	servicegroup = "Random"
 
-char = paranoia.make_random_char(style, method, True, servicegroup)
+clearance_lookup = dict( [(x[0], x) for x in EquipmentDatabase.clearances] )
+
+clearance = clearance_lookup.get(query.getvalue('clearance'), 'RED')
+
+clearance_init = query.getvalue('clearance')
+if clearance_init not in clearance_lookup.keys():
+	clearance_init = 'R'
+
+char = paranoia.make_random_char(style, method, mutant_experience, servicegroup, clearance_init)
 
 if query.has_key('customid'):
 	char.name = "%s-%s-%s-%s" % (query.getvalue('customname'), query.getvalue('clearance'), query.getvalue('sector'), query.getvalue('cloneno'))
 	char.gender = query.getvalue('gender')
 	
+
 mainTitle = ParagraphStyle(name='MainTitle',
                               parent=title,
                               fontName = 'Helvetica-Bold',
@@ -88,6 +99,15 @@ mainTitle = ParagraphStyle(name='MainTitle',
                               leading=22,
                               alignment=TA_CENTER,
                               spaceAfter=6)
+
+notesStyle = ParagraphStyle(name='Notes',
+                              parent=normal,
+                              fontName = 'Helvetica',
+                              fontSize = 10,
+                              leading = 12,
+							  alignment = TA_LEFT,
+							  spaceBefore = 0,
+							  spaceAfter = 0)
 
 individualSkillStyle = TableStyle([('FONT', (0,0), (-1, -1), "Helvetica", 10),
 						      ('ALIGN', (1, 0), (1, -1), "RIGHT"),
@@ -104,6 +124,7 @@ skillTableStyle = TableStyle([('BACKGROUND',(0,0),(-1, 0),colors.black),
 							  ('LINEBEFORE', (2, 1), (2, -1), 1, colors.black),
 		  					  ('LINEBELOW', (0, -1), (-1, -1), 1, colors.black),
 							  ('VALIGN', (0, 1), (-1, -1), 'TOP'),
+							  ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
 							  ('FONT', (0,0), (-1, 0), "Helvetica-Bold", 16),
 							  ('LEFTPADDING', (0,0), (-1, -1), 2),
 							  ('RIGHTPADDING', (0,0), (-1, -1), 2),
@@ -132,6 +153,13 @@ footer = [
 ]
 
 
+equipTableStyle = TableStyle([ ('FONT', (0,0), (-1, -1), "Helvetica", 8),
+							   ('BOTTOMPADDING', (0,0), (-1, -1), 0),
+							   ('TOPPADDING', (0,0), (-1, -1), 0),
+							   ('LEFTPADDING', (0,0), (-1, -1), 0),
+							   ('RIGHTPADDING', (0,0), (-1, -1), 0)
+							    ]   )
+
 miscTableStyle = TableStyle([ ('LINEBEFORE', (1, 4), (2, 4), 1, colors.black),
 							('LINEBELOW', (0, 4), (-1, 4), 1, colors.black),
 							('FONT', (0,0), (-1, -1), "Helvetica", 12),
@@ -139,6 +167,7 @@ miscTableStyle = TableStyle([ ('LINEBEFORE', (1, 4), (2, 4), 1, colors.black),
 							('SPAN', (0,1), (-1, 1)),
 							('SPAN', (0,2), (-1, 2)),
 						    ('VALIGN', (0, 1), (0, 1), 'TOP'),
+						    ('VALIGN', (0, 4), (-1, 4), 'TOP'),
 						    ('BACKGROUND',(0,3),(-1, 3),colors.black),
 							('TEXTCOLOR',(0,3),(-1, 3),colors.white),
 							('FONT', (0,3), (-1, 3), "Helvetica-Bold", 16),
@@ -147,22 +176,61 @@ miscTableStyle = TableStyle([ ('LINEBEFORE', (1, 4), (2, 4), 1, colors.black),
 							])
 
 
-notesBlock = [Paragraph('', normal)]
+equipmentParaStyle = ParagraphStyle(name='Equipment',                             
+                              fontName = 'Helvetica',
+                              fontSize = 10,
+                              leading = 11,
+                              leftIndent = 7,
+							  rightIndent = 0,
+							  firstLineIndent = -6,
+							  alignment = TA_LEFT,
+							  spaceBefore = 0,
+							  spaceAfter = 0)
+
+notesBlock = [Paragraph('', notesStyle)]
+
 
 if char.group.cover != None:
-	notesBlock.append(Paragraph('You are a spy for %s [%s].' % (escape(char.group.name), escape(char.group.firm)), normal, 'a'))
+	notesBlock.append(Paragraph('You are a spy for %s [%s].' % (escape(char.group.name), escape(char.group.firm)), notesStyle, 'a'))
 elif char.group.spyon != None:
-	notesBlock.append(Paragraph('You are an industrial spy or saboteur for %s [%s].' % (escape(char.group.name), escape(char.group.firm)), normal, 'a'))
+	notesBlock.append(Paragraph('You are an industrial spy or saboteur for %s [%s].' % (escape(char.group.name), escape(char.group.firm)), notesStyle, 'a'))
 
 notesBlock += get_spy_info(char.society)
+
+rev_cl_lookup = dict([ (v, k) for (k, v) in clearance_lookup.items() ])
+
+rev_cl_lookup['ULTRAVIOLET'] = 'UV'
+rev_cl_lookup['INFRARED'] = 'IR'
+
+e_list, credits_left = EquipmentDatabase.get_equip(1000, clearance, 10)
+
+notesBlock.append(Paragraph('Credits: %i' % credits_left, notesStyle))
+
+# let me only append x5, or whatever, if it's not a quantity of 1
+def opt_multiplier(x):
+	if (x>1):
+		return 'x'+ str(x)
+	else:
+		return ''
+
+personalEquip   = [ Paragraph(item.name.replace('&', '&amp;') + ' ' + opt_multiplier(quant) + ' (' + rev_cl_lookup.get(item.clearance, 'illegal') + ')' , equipmentParaStyle)  for (item, quant) in e_list if item.legal_at_clearance(clearance) ]
+assignedEquip   = [ Paragraph(x, equipmentParaStyle) for x in [ 'Laser Pistol body', '%s Reflec armor' % clearance, 'Series 1300 PDC' ] ]
+treasonousEquip = [ Paragraph(item.name.replace('&', '&amp;') + ' ' + opt_multiplier(quant) + ' (' + rev_cl_lookup.get(item.clearance, 'illegal') + ')', equipmentParaStyle) for (item, quant) in e_list if not item.legal_at_clearance(clearance) ]
+
+if len(personalEquip) == 0:
+	personalEquip = [ Paragraph('', equipmentParaStyle) ]
+
+if len(treasonousEquip) == 0:
+	treasonousEquip = [ Paragraph('', equipmentParaStyle) ]
+
 
 
 miscTable = Table([[Paragraph('Notes', title), '', ''], 
 				   [notesBlock, '', ''], 
 				   [Paragraph('Equipment', title), '',''],
 				   ['Personal', 'Assigned', 'Treasonous'],
-				   ['', '', '']], style=miscTableStyle,
-					rowHeights=[None, inch*3, None, None, inch*2.5])
+				   [personalEquip, assignedEquip, treasonousEquip]], style=miscTableStyle,
+					rowHeights=[None, inch*2.5, None, None, inch*3.3])
 
 privatesheet = [
 	Paragraph('<b>Mutant power:</b> ' + util.format_power(char), normal),

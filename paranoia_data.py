@@ -4,8 +4,8 @@ specs = {
     'Management': ['Bootlicking', 'Chutzpah', 'Hygiene', 'Con Games',
                    'Interrogation', 'Intimidation', 'Moxie', 'Oratory'],
     'Stealth': ['Concealment', 'Disguise', 'High Alert',
-                'Security Systems', 'Shadowing', 'Slight of Hand',
-                'Sneaking', 'Surveilance'],
+                'Security Systems', 'Shadowing', 'Sleight of Hand',
+                'Sneaking', 'Surveillance'],
     'Violence': ['Agility', 'Energy Weapons', 'Demolition',
                  'Field Weapons', 'Fine Manipulation', 'Hand Weapons',
                  'Projectile Weapons', 'Thrown Weapons',
@@ -30,7 +30,7 @@ groups = {
     'Armed Forces': {
         'weight': 3,
         'firms': ['Ammunition Fresheners', 'Armed Forces Friends Network',
-                  'Bodygaurd Communications Liaisons', 'Blast Shield Maintenance',
+                  'Bodyguard Communications Liaisons', 'Blast Shield Maintenance',
                   'Crowd Control', 'Sensitivity Trainers', 'Threat Assessors',
                   'Tool & Die Works', 'Vulture Squadron Recruiters'],
         'specs': ['Demolition', 'Energy Weapons', 'Hand Weapons', 'Projectile Weapons',
@@ -41,10 +41,10 @@ groups = {
     },
     'Central Processing Unit': {
         'weight': 2,
-        'firms': ['Ammunition Fresheners', 'Armed Forces Friends Network',
-                  'Bodygaurd Communications Liaisons', 'Blast Shield Maintenance',
-                  'Crowd Control', 'Sensitivity Trainers', 'Threat Assessors',
-                  'Tool & Die Works', 'Vulture Squadron Recruiters'],
+        'firms': ['116 Emergency Systems', 'Credit License Checkers', 'Facility Surveillance'
+                   'Form Facilitators', 'Form Inventory Officers', 'Form Disposal Advisors',
+                   'Pocket Protector Refurbishers', 'Security System Installers', 
+                   'Volunteer Collection Agencies'],
         'specs': ['Security Systems', 'Electronic Engineering', 'Bot Programming',
                    'Data Analysis', 'Financial Systems', 'Data Search', 'Vehicle Programming'],
         'societies': [(4, 'Computer Phreaks'), (4, 'Corpore Metal'), (2, 'FCCC-P'),
@@ -70,7 +70,7 @@ groups = {
                   'Termination Center Janitorial', 'Thought Surveyors',
                   'Threat Assessors', 'Treason Scene Cleanup'],
         'specs': ['Interrogation', 'Intimidation', 'Security Systems',
-                  'Surveilance', 'Energy Weapons', 'Hand Weapons', 'Unarmed Combat'],
+                  'Surveillance', 'Energy Weapons', 'Hand Weapons', 'Unarmed Combat'],
         'societies': [(3, 'Anti-Mutant'), (3, 'Death Leopard'), (3, 'FCCC-P'),
                       (3, 'Frankenstein Destroyers'), (1, 'Communists'), (1, 'Free Enterprise'), (1, 'Pro Tech'),
                       (1, 'Psion'), (1, 'PURGE'), (1, 'Illuminati'), (1, 'Spy')]

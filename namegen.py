@@ -25,13 +25,13 @@ def random_line(filename):
 def random_char():
     return random.choice(string.ascii_uppercase)
 
-def random_name():
+def random_name(clearance_initial = 'R'):
     namefile = random.choice(["female-names", "male-names"])
     firstname = random_line(namefile).strip()
     sector = ""
     for i in xrange(3):
         sector += random_char()
-    return "%s-%s-%s-%i" % (firstname, 'R', sector, 1)
+    return "%s-%s-%s-%i" % (firstname, clearance_initial, sector, 1)
 
 if __name__ == "__main__":
     print random_name()

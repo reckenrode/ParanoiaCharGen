@@ -175,12 +175,12 @@ def pick_society(group, style):
         return SecretSociety(name = society, skills = getskills(lookup_society(society)), degree = degree)
 
 
-def make_random_char(style, skillpick="die", mutant_experience=False, service_group='Random'):
+def make_random_char(style, skillpick="die", mutant_experience=False, service_group='Random', clearance='R'):
     """Returns a new troubleshooter to serve Friend Computer. Termination of
     commie mutant traitors that may be generated is left up to the user."""
     char = Character()
 
-    char.name = namegen.random_name()
+    char.name = namegen.random_name(clearance)
     char.gender = util.weightedchoice([(20, 'Male'), (20, 'Female'), (5, 'Other')])
 
     
