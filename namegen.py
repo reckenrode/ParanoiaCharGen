@@ -29,9 +29,9 @@ def random_name(clearance_initial = 'R'):
     namefile = random.choice(["female-names", "male-names"])
     firstname = random_line(namefile).strip()
     sector = ""
-    for i in xrange(3):
+    for i in range(3):
         sector += random_char()
     return "%s-%s-%s-%i" % (firstname, clearance_initial, sector, 1)
 
 if __name__ == "__main__":
-    print random_name()
+    print(random_name())

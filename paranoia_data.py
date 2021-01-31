@@ -1,4 +1,5 @@
 import operator
+from functools import reduce
 
 specs = {
     'Management': ['Bootlicking', 'Chutzpah', 'Hygiene', 'Con Games',
@@ -132,7 +133,7 @@ groups = {
     }
 }
 
-weighted_groups = reduce(operator.add, [[g for w in xrange(v['weight'])] for g, v in groups.iteritems()])
+weighted_groups = reduce(operator.add, [[g for w in range(v['weight'])] for g, v in groups.items()])
 
 powers = {
     'classic': ['Charm', 'Corrosion', 'Detect Mutant Power', 'Electroshock', 'Empathy',
